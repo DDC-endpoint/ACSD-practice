@@ -1,0 +1,37 @@
+/* d11: page layout with CSS Grid. Page.tsx shows the markup these rules style. */
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* TODO d11-1: .page
+   - display: grid
+   - a 2-column grid (e.g. grid-template-columns: 200px 1fr)
+   - grid-template-areas with 3 quoted rows: header across the top,
+     sidebar + main in the middle, footer across the bottom
+     (every row must have the same number of columns) */
+
+/* TODO d11-2: place .page-header, .page-sidebar, .page-main and .page-footer
+   in their areas with grid-area (header / sidebar / main / footer) */
+
+/* TODO d11-3: .cards
+   - display: grid
+   - grid-template-columns: as many columns as fit, each at least 200px and
+     sharing the leftover space: repeat(auto-fit, minmax(...)) */
+
+/* TODO d11-4: h1 font-size that grows with the viewport (4vw)
+   but never goes below 1.5rem or above 3rem. One function does this. */
+
+/* TODO d11-5: a clearly visible outline on :focus-visible (keyboard focus).
+   Do NOT remove focus outlines globally (no `*:focus { outline: none }`). */
+
+/* TODO d11-6: @media (max-width: 600px)
+   re-declare .page with ONE column: 1fr, and areas stacked one per row
+   (header, main, sidebar, footer) */
