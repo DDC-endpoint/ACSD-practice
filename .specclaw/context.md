@@ -29,3 +29,13 @@ _Last updated: 2026-11-23 (change 001 build)_
 ## Constraints
 - The exam page uses no network: no CDN, web fonts or `fetch`. It carries no Blackboard name or logo, and copies only the layout pattern.
 - `bash scripts/selfcheck.sh` must print `SELFCHECK PASS` before a PR.
+
+## Learnings from change 001 (2026-11-23)
+- **The papers follow the module mock's blueprint: 49 items** (20 MCQ + 15 TF + 5 C + 4 D + 5 E), 100 marks. Not 45.
+- `package.json` has `"type": "module"`, so in Node the UMD paper files must be **evaluated in a `vm` context** (`ctx.self = ctx`), not `require`d. `exam/marking.test.ts` shows how.
+- jsdom replaces the global `URL`, so `new URL(..., import.meta.url)` breaks in drill tests. Use `resolve(dirname(fileURLToPath(import.meta.url)), "../src/x")` or `__dirname`.
+- d02 (types) and d11 (CSS) check declarations by **reading the source as text**, because types and layout don't exist at runtime in jsdom.
+- TanStack v5 typings: `getQueryCache().find(...)?.options.staleTime` is untyped, so tests assert `staleTime` through behaviour (remount → no refetch).
+- Selfcheck AC-6 skips `exam/papers/` because question text legitimately contains `fetch("https://…")`. The papers aren't code that runs.
+- `specclaw-build finalize` merges locally and deletes the branch even when `test_command` fails. In this repo, open PRs through `/specclaw:pr` instead, and keep `.specclaw/changes/*/.lock/` and `logs/` gitignored.
+- Branch `solutions` = `main` + `.staging/solutions` overlay. After a PR merges, merge `main` into `solutions` and re-run `bash scripts/selfcheck.sh`.
