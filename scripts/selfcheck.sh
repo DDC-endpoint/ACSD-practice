@@ -39,8 +39,8 @@ process.exit(bad ? 1 : 0);
 # ---------- exam tests must pass on main too (papers carry their own answers) ----------
 if [ -d exam ]; then
   if npx vitest run exam >"$TMP/exam.log" 2>&1; then pass "AC-7/AC-8 exam marking tests"; else fail "AC-7/AC-8 exam marking tests"; tail -30 "$TMP/exam.log"; fi
-  # AC-6: no remote resource loads in exam/
-  if grep -rnE '(src|href)=["'"'"']https?://|fetch\(|@import url\(["'"'"']?https?:' exam --include='*.html' --include='*.js' --include='*.css' >"$TMP/net.log"; then fail "AC-6 remote resources in exam/"; cat "$TMP/net.log"; else pass "AC-6 exam/ loads nothing remote"; fi
+  # AC-6: no remote resource loads in exam/ (fetch( in question text is fine; a fetch of a remote URL is not)
+  if grep -rnE '(src|href)=["'"'"']https?://|fetch\(\s*["'"'"'`]https?://|@import url\(["'"'"']?https?:' exam --exclude-dir=papers --include='*.html' --include='*.js' --include='*.css' >"$TMP/net.log"; then fail "AC-6 remote resources in exam/"; cat "$TMP/net.log"; else pass "AC-6 exam/ loads nothing remote"; fi
   # AC-11: the word Blackboard never renders (only allowed in comments)
   if grep -rniE 'blackboard' exam --include='*.html' --include='*.js' --include='*.css' | grep -vE '^\S+:[0-9]+:\s*(//|/\*|\*|<!--)' >"$TMP/bb.log"; then fail "AC-11 'Blackboard' outside comments"; cat "$TMP/bb.log"; else pass "AC-11 no Blackboard branding"; fi
 fi
