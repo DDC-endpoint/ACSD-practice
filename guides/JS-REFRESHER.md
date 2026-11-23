@@ -415,6 +415,8 @@ More: [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
 ## 5. Async (j04)
 
+> The `fetch("/api/events")` snippets below use a *relative* URL, the way the app does. Pasted into a blank console or `node`, they fail with an invalid-URL or 404 error. To try `fetch` live, swap in a full public URL such as `https://jsonplaceholder.typicode.com/todos/1`.
+
 ### Promises
 
 JavaScript does not stop and wait for slow things such as network requests. A **Promise** is an object that stands for a value that will arrive later. It is *pending*, then *fulfilled* (with a value) or *rejected* (with an error).
@@ -597,7 +599,7 @@ export default function EventList({ title }: { title: string }) {    // 3
 | fetch throws on 404 | `try { await fetch(url) } catch` and assume errors land there | Check `if (!res.ok) throw new Error(...)` |
 | `.json()` on a 204 | `await res.json()` after DELETE throws | Check `res.status === 204` first and skip the parse |
 | `typeof null` | "`typeof null` is `'null'`" | It is `"object"`. Check `x === null` |
-| `sort` mutates | `setItems(items.sort(...))` | `setItems([...items].sort(...))` or `items.toSorted(...)` |
+| `sort` mutates | `setItems(items.sort(...))` | `setItems([...items].sort(...))` (copy first). Newer JS also has `items.toSorted(...)`, but this project's TypeScript settings (ES2022) don't include it, so use the spread form |
 | `forEach` returns | `const names = list.forEach((e) => e.title)` is `undefined` | Use `map` to get a new array |
 | Import braces | `import { EventCard } from "./EventCard"` for a default export | Default: `import EventCard from ...`. Named: `import { seatsLeft } from ...` |
 | Calling vs passing | `onClick={handle()}` runs during render | `onClick={handle}` or `onClick={() => handle(id)}` |

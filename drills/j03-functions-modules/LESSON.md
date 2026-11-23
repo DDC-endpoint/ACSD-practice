@@ -48,12 +48,13 @@ const area = (w, h) => {            // with { } you must write `return` yourself
 You want an arrow function that returns an **object**. This looks right and is wrong:
 
 ```js
-const toPoint = (x, y) => { x: x, y: y };      // ✘ the { } is read as a function BODY, so you get undefined
-const toPoint = (x, y) => ({ x: x, y: y });    // ✔ round brackets around the object
-toPoint(1, 2);                                 // { x: 1, y: 2 }
+const toId = (x) => { id: x };              // ✘ the { } is read as a function BODY, so you get undefined
+const toPoint = (x, y) => { x: x, y: y };    // ✘ worse: with two properties it is a SyntaxError and the whole file won't load
+const toPoint2 = (x, y) => ({ x: x, y: y }); // ✔ round brackets around the object
+toPoint2(1, 2);                              // { x: 1, y: 2 }
 ```
 
-`{ ... }` after `=>` means "function body". Wrap the object in `( )` to say "this is a value".
+`{ ... }` after `=>` means "function body". Wrap the object in `( )` to say "this is a value". Forget the brackets and you get `undefined` with one property, or a `SyntaxError` (the file won't even load) with more than one.
 
 **In React you'll see this as:** `setUser((prev) => ({ ...prev, name: "Ana" }))`. That `({ ... })` is exactly this trap.
 
@@ -220,9 +221,9 @@ Test 1 says `formatPrice` is `undefined`. That is because the file doesn't expor
 `pence / 100` turns 1250 into 12.5. `.toFixed(2)` turns that into the text `"12.50"` (two decimal places). Put `£` in front using a template literal: `` `£${(pence / 100).toFixed(2)}` ``.
 </details>
 
-<details><summary>Hint 3: test 3 says <code>undefined</code> (j03-2)</summary>
+<details><summary>Hint 3: test 3 fails, or the whole file won't load (j03-2)</summary>
 
-You wrote `=> { id: event.id, label: event.title }`. The braces are read as a function body. Wrap the object in round brackets: `=> ({ id: event.id, label: event.title })`.
+You probably wrote `=> { id: event.id, label: event.title }`. The braces are read as a function body, and with two properties that is a `SyntaxError`, so every test in the file fails. Wrap the object in round brackets: `=> ({ id: event.id, label: event.title })`.
 </details>
 
 <details><summary>Hint 4: test 4 says <code>typeof fmt.default</code> is not a function (j03-3)</summary>

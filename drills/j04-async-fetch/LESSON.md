@@ -20,7 +20,7 @@ tasks:
 
 ## The idea
 
-Try snippets yourself: open the browser DevTools console (F12 → Console) and paste them, or run `node` in a terminal. (`fetch` works in both. In the console, `await` works at the top level.)
+Try snippets yourself: open the browser DevTools console (F12 → Console) and paste them, or run `node` in a terminal. (In the console, `await` works at the top level. The `fetch("/api/events")` examples use a *relative* URL, which only works inside the drill's tests and the real app. To try `fetch` live, use a full public URL such as `https://jsonplaceholder.typicode.com/todos/1`.)
 
 ### 1. A Promise is "a value that arrives later"
 

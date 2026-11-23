@@ -89,7 +89,7 @@ typeof null        // "object"   ← a famous quirk
 
 ### 4. Truthy and falsy
 
-When JavaScript needs a yes/no (in an `if`, `&&`, `!`), it converts the value. Exactly these are **falsy** (count as "no"):
+When JavaScript needs a yes/no (in an `if`, `&&`, `!`), it converts the value. These six are the **falsy** values you'll meet (count as "no"):
 
 ```js
 false   0   ""   null   undefined   NaN
@@ -307,7 +307,7 @@ Answer out loud, the way you'd write it in a Section C/D text box, then open the
 
 <details><summary>Which values are falsy in JavaScript? Is an empty array falsy?</summary>
 
-Exactly six: `false`, `0`, `""` (empty string), `null`, `undefined` and `NaN`. Everything else is truthy. An empty array `[]` and an empty object `{}` are both **truthy**, so check `arr.length === 0`, not `!arr`.
+Six to remember: `false`, `0`, `""` (empty string), `null`, `undefined` and `NaN`. Everything else is truthy. An empty array `[]` and an empty object `{}` are both **truthy**, so check `arr.length === 0`, not `!arr`.
 </details>
 
 <details><summary>Why does <code>typeof null</code> give <code>"object"</code>, and how do you check for null properly?</summary>

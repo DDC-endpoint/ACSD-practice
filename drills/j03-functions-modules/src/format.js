@@ -19,7 +19,7 @@ const formatPrice = (pence) => {
 
 // TODO j03-2: an arrow function that returns an OBJECT: { id: event.id, label: event.title }.
 //   Careful: the object needs round brackets around it: ({ ... }). Without them the { } is read
-//   as a function body and you get undefined.
+//   as a function body: undefined with one property, a SyntaxError (file won't load) with two.
 export const toSummary = (event) => {
   throw new Error("TODO j03-2");
 };
