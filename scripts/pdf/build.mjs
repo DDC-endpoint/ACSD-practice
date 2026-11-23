@@ -178,7 +178,7 @@ const browser = await puppeteer.launch({ executablePath: findBrowser(), headless
 try {
   for (const s of todo) {
     const doc = parseDoc(s.src);
-    const id = String(doc.meta.id ?? basename(s.dir)).toUpperCase().replace(/^D/, 'd');
+    const id = String(doc.meta.id ?? basename(s.dir)).toUpperCase().replace(/^([DJ])/, (c) => c.toLowerCase());
     if (s.kind === 'drill') {
       await render(browser, page(`${id} · Lesson`, lessonHtml(doc, id)), join(s.dir, 'LESSON.pdf'), `${id} · Lesson · ${doc.meta.title ?? ''}`);
       await render(browser, page(`${id} · Hints`, hintsHtml(doc, id)), join(s.dir, 'HINTS.pdf'), `${id} · Hints & viva answers`);
