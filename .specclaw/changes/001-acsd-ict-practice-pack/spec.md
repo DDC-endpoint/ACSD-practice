@@ -37,7 +37,7 @@ It is modelled on `D:\OOP-practice`: teach first, then test, with the answers on
   The mapping to mock questions is the one in proposal.md.
 - **FR-4 Exam page.** `exam/index.html` opens straight from disk (`file://`), offline, with no build step.
   - A start screen offers a paper (Mock 1 / Mock 2) and a mode (Exam / Practice).
-  - The layout copies a Blackboard test: a title bar, a timer, an "N of 45 answered" progress count, numbered question cards showing points, radio buttons for MCQ/TF, monospace text areas for code, and **Save and Submit**.
+  - The layout copies a Blackboard test: a title bar, a timer, an "N of 49 answered" progress count, numbered question cards showing points, radio buttons for MCQ/TF, monospace text areas for code, and **Save and Submit**.
   - It carries no Blackboard name, logo or trade dress colours.
 - **FR-5 Papers.**
   - Mock 1 reproduces the module mock verbatim: 20 MCQ + 15 TF + 5 short answer + 4 programming (with parts a–d) + 5 security = 100 marks.
@@ -69,7 +69,7 @@ It is modelled on `D:\OOP-practice`: teach first, then test, with the answers on
 - [ ] **AC-4** `git diff main solutions --name-only` lists only paths under `drills/*/src/`.
 - [ ] **AC-5** Every `LESSON.md` has the front matter and the five sections. Every mock question id A1–E5 appears in at least one drill's `mock:` list, except pure recall items, which are listed in the README instead.
 - [ ] **AC-6** `exam/` contains no `http(s)://` resource loads (script, link, img or fetch). The page renders from `file://`.
-- [ ] **AC-7** Mock 1 and Mock 2 each have 45 items. Section totals are 20/15/15/40/10 and the paper total is 100 (checked by a test).
+- [ ] **AC-7** Mock 1 and Mock 2 each have 49 items (20 + 15 + 5 + 4 + 5; corrected from 45 during build). Section totals are 20/15/15/40/10 and the paper total is 100 (checked by a test).
 - [ ] **AC-8** Marking test: for both mocks, entering all the model/correct answers scores 100, and all-blank scores 0. For every C/D part, a listed wrong answer scores at most half of that part.
 - [ ] **AC-9** In a browser: Exam mode shows a countdown that survives a reload and auto-submits at 0. Practice mode's Check shows feedback. Unticking a rubric point lowers the total.
 - [ ] **AC-10** `guides/REFRESHER.pdf` and `guides/EXAM-DAY.pdf` are built, and the PDF check passes.

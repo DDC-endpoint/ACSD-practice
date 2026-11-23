@@ -1,0 +1,5 @@
+{"ev":"start","span":"plan","kind":"phase","label":"plan","at":"2026-11-23T17:27:50Z","ts":1795454870}
+{"ev":"stop","span":"plan","at":"2026-11-23T17:30:00Z","ts":1795455000,"status":"ok"}
+{"ev":"start","span":"W1","kind":"wave","label":"wave 1","at":"2026-11-23T17:30:33Z","ts":1795455033}
+{"ev":"start","span":"W2","kind":"wave","label":"wave 2","at":"2026-11-23T17:32:40Z","ts":1795455160}
+{"ev":"start","span":"verify-1795457352","kind":"phase","label":"verify","at":"2026-11-23T18:09:12Z","ts":1795457352}

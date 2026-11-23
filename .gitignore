@@ -1,0 +1,9 @@
+node_modules/
+.staging/
+dist/
+coverage/
+*.log
+.specclaw/worktrees/
+scripts/pdf/node_modules/
+.specclaw/changes/*/.lock/
+.specclaw/changes/*/logs/
