@@ -1,6 +1,6 @@
 {
   "change": "001-acsd-ict-practice-pack",
-  "phase": "pr",
+  "phase": "archived",
   "branch": "specclaw/001-acsd-ict-practice-pack",
   "size": "architectural",
   "phases": {
@@ -10,6 +10,7 @@
     "tasks": {"status":"done","at":"2026-11-23T17:29:58Z"},
     "build": {"status":"failed","at":"2026-11-23T18:08:18Z","tasks":{"done":11,"total":11,"failed":0}},
     "verify": {"status":"passed","at":"2026-11-23T18:14:17Z","verdict":"PASS"},
-    "pr": {"status":"raised","at":"2026-11-23T18:15:01Z","url":"https://github.com/DDC-endpoint/ACSD-practice/pull/1"}
+    "pr": {"status":"raised","at":"2026-11-23T18:15:01Z","url":"https://github.com/DDC-endpoint/ACSD-practice/pull/1"},
+    "archived": {"status":"done","at":"2026-11-23T18:28:37Z"}
   }
 }
