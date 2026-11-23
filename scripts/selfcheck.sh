@@ -25,7 +25,7 @@ node -e '
 const r = require(process.argv[1]); const byDrill = {};
 let loadErr = [];
 for (const f of r.testResults) {
-  const m = f.name.replace(/\/g, "/").match(/drills\/(d\d\d)[^/]*\//); if (!m) continue;
+  const m = f.name.split(String.fromCharCode(92)).join("/").match(/drills\/(d\d\d)[^/]*\//); if (!m) continue;
   const d = (byDrill[m[1]] ??= { fail: 0, total: 0 });
   if (f.assertionResults.length === 0) loadErr.push(f.name + ": " + (f.message || "").split("\n")[0]);
   for (const a of f.assertionResults) { d.total++; if (a.status !== "passed") d.fail++; }

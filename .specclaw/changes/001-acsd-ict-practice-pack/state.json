@@ -1,12 +1,13 @@
 {
   "change": "001-acsd-ict-practice-pack",
-  "phase": "tasks",
-  "branch": "",
+  "phase": "build",
+  "branch": "specclaw/001-acsd-ict-practice-pack",
   "size": "architectural",
   "phases": {
     "proposal": {"status":"approved","at":"2026-11-23T17:27:45Z"},
     "spec": {"status":"done","at":"2026-11-23T17:29:57Z"},
     "design": {"status":"done","at":"2026-11-23T17:29:58Z"},
-    "tasks": {"status":"done","at":"2026-11-23T17:29:58Z"}
+    "tasks": {"status":"done","at":"2026-11-23T17:29:58Z"},
+    "build": {"status":"in-progress","at":"2026-11-23T17:30:06Z"}
   }
 }

@@ -1,0 +1,191 @@
+MOCK ICT – Actual ICT questions will appear on Blackboard instead of a word file.
+Advanced Client-Side Web Development
+Duration: 90 minutes - 25 extra minutes for RAF studentsTotal marks: 100
+Instructions to Candidates
+- Answer all questions in Sections A-E.
+- The examination is worth 100 marks.
+- Select one answer for each multiple-choice question.
+- Select True or False for each statement.
+- Use React with TypeScript or JavaScript and JSX for programming questions, as specified.
+- Logically correct solutions receive credit.
+- Show your reasoning where requested.
+- All questions are based on client-side development. Backend implementation is outside the scope of this examination.
+Time and Mark Distribution
+Section
+Question type
+Marks
+Time
+A
+Multiple choice (20 × 1)
+20
+15 min
+B
+True/False (15 × 1)
+15
+10 min
+C
+Short answer (5 × 3)
+15
+15 min
+D
+Programming and analysis (4 × 10)
+40
+40 min
+E
+Front-end security (5 × 2)
+10
+10 min
+Total
+100
+90 min
+ [IMAGE]
+Section A - Multiple Choice (20 marks)
+Choose ONE answer for each question. Each question is worth 1 mark.
+A1. A React application needs to display the total value of all items in a shopping basket. Which JavaScript array method is most appropriate for calculating a single accumulated value?
+A. find()B. reduce()C. sort()D. slice()
+A2. A developer wants to navigate programmatically to /dashboard after a user successfully signs in. Which React Router Hook is designed for this purpose?
+A. useParams()B. useLocation()C. useNavigate()D. useSearchParams()
+A3. In TypeScript, which keyword is used to define a custom type alias?
+A. interfaceOnlyB. typeC. defineD. structure
+A4. A React application needs to display different content depending on whether a user has selected a particular tab. Which programming technique is most appropriate?
+A. Conditional renderingB. Database migrationC. Server-side rendering configurationD. CSS font loading
+A5. Which HTTP status code indicates that a request was understood but the user is not authenticated?
+A. 201B. 204C. 401D. 500
+A6. Which React Router component allows child routes to render inside a parent layout?
+A. &lt;Navigate /&gt;B. &lt;Outlet /&gt;C. &lt;Link /&gt;D. &lt;BrowserRouter /&gt;
+A7. What is the main purpose of Promise.all() in JavaScript?
+A. To execute multiple asynchronous operations and wait for all of them to settle successfullyB. To cancel every pending requestC. To convert JavaScript objects into TypeScript interfacesD. To execute asynchronous operations one after another automatically
+A8. In TypeScript, what is the purpose of an interface?
+A. To define the expected structure of an objectB. To create a CSS classC. To automatically send API requestsD. To store application data permanently
+A9. Which CSS property is particularly useful for creating layouts with named grid areas?
+A. grid-template-areasB. text-transformC. letter-spacingD. border-radius
+A10. A developer wants to retrieve the identifier from a dynamic route such as /products/42. Which React Router Hook is most suitable?
+A. useNavigate()B. useParams()C. useState()D. useRef()
+A11. What does the staleTime option in TanStack Query control?
+A. How long cached query data is considered freshB. How long a browser session remains authenticatedC. How long a React component remains mountedD. How long a form submission takes
+A12. Which Zustand function is commonly used to access a particular piece of data from a store?
+A. useState()B. useEffect()C. The store's generated HookD. createContext()
+A13. What is the purpose of an HTTP 204 No Content response?
+A. It indicates that the request succeeded but there is no response body to returnB. It indicates that the server has crashedC. It means that authentication has failedD. It indicates that a requested page has moved permanently
+A14. Which TypeScript type would be most appropriate for a variable that can contain either a string or a number?
+A. string &amp; numberB. string | numberC. string + numberD. string / number
+A15. What is the main purpose of the invalidateQueries() function in TanStack Query?
+A. To remove all React componentsB. To mark matching cached queries as invalid so they can be refreshedC. To permanently delete the API endpointD. To disable all future API requests
+A16. Which CSS function allows a property to have a preferred value while respecting minimum and maximum limits?
+A. calc()B. minmax()C. clamp()D. var()
+A17. A developer wants to prevent a user from submitting a form if an email address does not meet a required format. Which approach is most appropriate?
+A. Client-side validationB. Changing the page titleC. Adding a CSS animationD. Using browser local storage only
+A18. Which React Hook is commonly used to access URL query-string parameters through React Router?
+A. useSearchParams()B. useReducer()C. useMemo()D. useCallback()
+A19. What is the main benefit of separating API calls into a dedicated service module?
+A. It removes the need for HTTP requestsB. It separates data-access logic from presentation componentsC. It automatically creates a backendD. It prevents all network errors
+A20. What is the purpose of the CSS pseudo-class :focus-visible?
+A. To apply styling when an element receives focus in situations where a visible focus indicator is appropriateB. To hide all focused elementsC. To prevent keyboard navigationD. To resize elements when clicked
+ [IMAGE]
+Section B - True/False (15 marks)
+Select True or False for each statement. Each question is worth 1 mark.
+B1. A React application can use React Router to display different page components without requiring a full browser page reload for every navigation.
+B2. TypeScript interfaces can be used to describe the expected properties of objects received from an API.
+B3. The JavaScript find() method returns every element that satisfies a condition.
+B4. A React custom Hook must follow the Rules of Hooks, including being called at the top level of a component or another custom Hook.
+B5. A 403 Forbidden response generally indicates that the request was understood but the user does not have sufficient permission.
+B6. TanStack Query is designed to help manage asynchronous server data, including caching and synchronisation.
+B7. Zustand requires every component in an application to subscribe to the entire store.
+B8. A dynamic route can use a URL parameter to identify which record should be displayed.
+B9. Client-side validation guarantees that invalid data can never reach a server.
+B10. The HTTP PUT method can be used by a frontend application when updating an existing resource.
+B11. A React application can use different layouts for different route groups.
+B12. The CSS minmax() function can specify minimum and maximum sizes for grid tracks.
+B13. A TypeScript union type allows a value to belong to one of several specified types.
+B14. TanStack Query and Zustand are interchangeable tools designed exclusively for storing server responses.
+B15. A frontend application can use a JWT's expiry information to determine whether a token may have expired.
+ [IMAGE]
+Section C - Short Answer (15 marks)
+Answer all five questions. Each question is worth 3 marks.
+C1. JavaScript - Array Reduction
+Consider the following data:
+const prices = [15, 25, 10, 30];
+Write a JavaScript statement using reduce() to calculate the total of all prices and store the result in a variable named total.
+C2. TypeScript - Object Structure
+Write a TypeScript interface named Product containing the following properties:
+- id: number
+- name: string
+- price: number
+- description: optional string
+C3. React Router - Dynamic Parameters
+A React application uses the following route:
+/orders/:orderId
+Name the React Router Hook that retrieves the route parameter and write the expression used to obtain orderId.
+C4. TanStack Query - Cache Management
+After successfully updating a customer's profile, the application needs to ensure that previously cached customer information is refreshed.
+Write the TanStack Query function commonly used for this purpose and briefly explain what it does.
+C5. API Handling - HTTP Status Codes
+Explain the difference between an HTTP 401 Unauthorized response and a 403 Forbidden response from the perspective of a frontend application.
+ [IMAGE]
+Section D - Programming, Explanation and Code Analysis (40 marks)
+Answer all four questions. Each question is worth 10 marks.
+D1. React Router - Application Navigation (10 marks)
+A student-management application contains the following pages:
+- Home page: /
+- Student list: /students
+- Individual student details: /students/:studentId
+- Settings page: /settings
+The application should use a shared layout containing a navigation menu. The student details page must display the ID belonging to the selected student.
+a. Write a React Router configuration that defines the routes listed above. Use a shared layout for the pages. (4 marks)
+b. Explain the purpose of the &lt;Outlet /&gt; component in the shared layout. (2 marks)
+c. Write a small React component that retrieves studentId from the URL and displays it. (2 marks)
+d. Explain how a user could navigate to the settings page programmatically after saving their preferences. Name the appropriate Hook and describe its use. (2 marks)
+D2. React API Consumption - Asynchronous Operations (10 marks)
+A React application needs to retrieve a list of courses from the following API endpoint:
+https://example.com/api/courses
+The application should:
+- Retrieve the course data when the component loads.
+- Display a loading message while the request is in progress.
+- Display an error message if the request fails.
+- Display the number of courses after a successful request.
+- Avoid updating component state after the component has been unmounted.
+a. Explain why an asynchronous operation is needed when communicating with an external API. (2 marks)
+b. Write a React component or custom Hook that implements the requirements above. You may use useEffect, useState and AbortController. (6 marks)
+c. Explain why an API service module can be beneficial when several components need to access the same endpoint. (2 marks)
+D3. Forms, Validation and CRUD (10 marks)
+A React application allows users to create a new event.
+The form contains the following information:
+Event Name
+Location
+Maximum Attendees
+The requirements are:
+- Event Name must not be empty.
+- Location must not be empty.
+- Maximum Attendees must be a positive integer.
+- If validation fails, the user must receive an appropriate error message.
+- If validation succeeds, the frontend must submit the data to the following endpoint:
+POST /api/events
+a. Write a JavaScript or TypeScript validation function that checks all three requirements. It should return suitable validation errors. (4 marks)
+b. Write a function that submits valid event data using the Fetch API and the POST method. Include appropriate request headers and JSON serialisation. (3 marks)
+c. Explain the difference between POST and PUT from the perspective of a frontend application performing CRUD operations. (3 marks)
+D4. State Management - Zustand and TanStack Query (10 marks)
+A shopping application contains the following requirements:
+- The selected theme (light or dark) must be available across multiple components.
+- Product information must be retrieved from an external API.
+- Product information should be cached.
+- When a product is updated, the application should refresh the relevant product information.
+- The application should avoid unnecessary API requests.
+Answer all parts.
+a. Identify which of the requirements should be handled using Zustand and which should be handled using TanStack Query. Explain your choices. (4 marks)
+b. Describe what query caching means in TanStack Query and how it benefits the application. (2 marks)
+c. Explain how the application can ensure that product information is refreshed after a successful update. (2 marks)
+d. Explain one advantage of using a selector when accessing data from a Zustand store. (2 marks)
+ [IMAGE]
+Section E - Front-End Security (10 marks)
+Answer all five questions. Each question is worth 2 marks.
+E1. A user successfully signs in, but their JWT has expired when they attempt to access a protected page. What should the frontend application normally do?
+A. Continue treating the user as authenticated indefinitelyB. Handle the expired authentication state and require reauthentication or an appropriate token-renewal flowC. Ignore the expiry informationD. Display the protected page regardless of authentication
+E2. What is the main difference between authentication and authorisation?
+A. Authentication identifies who a user is; authorisation determines what they are allowed to accessB. Authentication controls CSS; authorisation controls HTMLC. Both terms mean exactly the same thingD. Authorisation always happens before a user is identified
+E3. A frontend application allows users to access different pages depending on their roles. Why should the frontend not rely exclusively on hiding restricted pages as its security mechanism?
+A. Because React cannot display different pagesB. Because users may manipulate client-side code or requests, so access permissions must also be enforced by the serverC. Because CSS cannot hide pagesD. Because routing automatically encrypts user information
+E4. True or False: Sending authentication tokens and other sensitive information over HTTPS helps protect them while travelling between the browser and server.
+E5. True or False: A frontend application should treat data received from an external API as automatically trustworthy simply because the request was successful.
+ [IMAGE]
+END OF EXAMINATION
+Total: 100 marks
