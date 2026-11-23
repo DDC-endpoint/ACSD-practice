@@ -6,3 +6,4 @@ coverage/
 .specclaw/worktrees/
 scripts/pdf/node_modules/
 .specclaw/changes/*/.lock/
+.specclaw/changes/*/logs/
