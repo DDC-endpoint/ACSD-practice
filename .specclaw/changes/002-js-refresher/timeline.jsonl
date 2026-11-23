@@ -1,0 +1,23 @@
+{"ev":"start","span":"propose","kind":"phase","label":"propose","at":"2026-11-23T19:02:01Z","ts":1795460520}
+{"ev":"stop","span":"propose","at":"2026-11-23T19:02:31Z","ts":1795460551,"status":"ok"}
+{"ev":"start","span":"plan","kind":"phase","label":"plan","at":"2026-11-23T19:03:08Z","ts":1795460588}
+{"ev":"stop","span":"plan","at":"2026-11-23T19:04:45Z","ts":1795460685,"status":"ok"}
+{"ev":"start","span":"W1","kind":"wave","label":"wave 1","at":"2026-11-23T19:04:59Z","ts":1795460699}
+{"ev":"stop","span":"W1","at":"2026-11-23T19:05:32Z","ts":1795460732,"status":"ok"}
+{"ev":"start","span":"T2","kind":"task","label":"T2","parent":"W2","at":"2026-11-23T19:05:45Z","ts":1795460745}
+{"ev":"start","span":"T3","kind":"task","label":"T3","parent":"W2","at":"2026-11-23T19:05:49Z","ts":1795460749}
+{"ev":"start","span":"T4","kind":"task","label":"T4","parent":"W2","at":"2026-11-23T19:05:52Z","ts":1795460752}
+{"ev":"start","span":"T5","kind":"task","label":"T5","parent":"W2","at":"2026-11-23T19:05:56Z","ts":1795460756}
+{"ev":"start","span":"T6","kind":"task","label":"T6","parent":"W2","at":"2026-11-23T19:06:00Z","ts":1795460760}
+{"ev":"start","span":"W2","kind":"wave","label":"wave 2","at":"2026-11-23T19:06:00Z","ts":1795460760}
+{"ev":"stop","span":"T6","at":"2026-11-23T19:08:53Z","ts":1795460933,"status":"ok"}
+{"ev":"stop","span":"T3","at":"2026-11-23T19:09:25Z","ts":1795460965,"status":"ok"}
+{"ev":"stop","span":"T2","at":"2026-11-23T19:09:37Z","ts":1795460977,"status":"ok"}
+{"ev":"stop","span":"T4","at":"2026-11-23T19:09:52Z","ts":1795460992,"status":"ok"}
+{"ev":"stop","span":"T5","at":"2026-11-23T19:10:07Z","ts":1795461007,"status":"ok"}
+{"ev":"stop","span":"W2","at":"2026-11-23T19:10:08Z","ts":1795461008,"status":"ok"}
+{"ev":"start","span":"W3","kind":"wave","label":"wave 3","at":"2026-11-23T19:10:08Z","ts":1795461008}
+{"ev":"stop","span":"T7","at":"2026-11-23T19:11:45Z","ts":1795461105,"status":"ok"}
+{"ev":"stop","span":"W3","at":"2026-11-23T19:11:45Z","ts":1795461105,"status":"ok"}
+{"ev":"start","span":"verify-1795461160","kind":"phase","label":"verify","at":"2026-11-23T19:12:40Z","ts":1795461160}
+{"ev":"stop","span":"verify","at":"2026-11-23T19:17:10Z","ts":1795461430,"status":"ok"}
