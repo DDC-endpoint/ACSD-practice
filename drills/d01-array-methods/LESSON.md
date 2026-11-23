@@ -18,6 +18,8 @@ tasks:
 
 # d01 · Array methods and Promise.all
 
+> **New to JavaScript?** Do j01–j04 first (see the README, section 0). This drill assumes you can read arrow functions and callbacks (j03) and `async`/`await` (j04).
+
 > **Exam link:** **A1**: *"display the total value of all items in a shopping basket. Which array method… for calculating a single accumulated value?"* → `reduce()` (the distractors are `find`, `sort`, `slice`). **C1**: *"`const prices = [15, 25, 10, 30];` Write a JavaScript statement using `reduce()` to calculate the total… in a variable named `total`"*: a one-line answer typed into a text box. **B3**: *"The JavaScript `find()` method returns every element that satisfies a condition"* → **False**. **A7**: *"What is the main purpose of `Promise.all()`?"* → run several async operations and wait for all of them to succeed.
 
 ## The idea

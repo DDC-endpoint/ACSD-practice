@@ -255,7 +255,7 @@ try {
 `finally` still runs even though `try` and `catch` already hit a `return`. Test 8 checks exactly that. Don't forget `await` on `load()`: without it, a rejected promise slips past your `catch`.
 </details>
 
-<details><summary>Hint 7: toBody and parseSaved</summary>
+<details><summary>Hint 7: the two JSON helpers</summary>
 
 `toBody` is `return JSON.stringify(obj);`. For `parseSaved`, put `return JSON.parse(text);` inside `try`, and `return null;` inside `catch`.
 </details>

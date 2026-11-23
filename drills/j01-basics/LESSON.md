@@ -269,12 +269,9 @@ The shape is `condition ? valueIfTrue : valueIfFalse`. The condition is just `ev
 
 <details><summary>Hint 5: <code>describeValue</code> (test 6)</summary>
 
-Three steps in this order, each a `return`:
-1. `if (value === null) return "null";`
-2. `if (Array.isArray(value)) return "array";`
-3. `return typeof value;`
+Three checks in this order, each one a `return`. First `if (value === null) return "null";`, then `if (Array.isArray(value)) return "array";`, and last `return typeof value;`.
 
-If `null` or arrays come out as `"object"`, you did step 3 too early.
+If `null` or arrays come out as `"object"`, you did the `typeof` check too early.
 </details>
 
 <details><summary>Hint 6: the loops (tests 7 and 8)</summary>
