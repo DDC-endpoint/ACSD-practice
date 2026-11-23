@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ACSD ICT practice test</title>
+  <link rel="stylesheet" href="exam.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar" id="topbar"></header>
+
+  <div class="shell" id="shell">
+    <nav class="qnav" id="qnav" aria-label="Question navigator" hidden></nav>
+    <div class="scrim" id="scrim" hidden></div>
+    <main class="main" id="main" tabindex="-1"></main>
+  </div>
+
+  <footer class="bottombar" id="bottombar" hidden></footer>
+
+  <div class="toast-region" id="toasts" role="status" aria-live="polite"></div>
+  <div class="sr-only" id="alerts" role="alert" aria-live="assertive"></div>
+
+  <dialog class="dialog" id="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-body">
+    <form method="dialog">
+      <h2 id="dialog-title"></h2>
+      <p id="dialog-body"></p>
+      <div class="dialog-actions">
+        <button class="btn" value="cancel" id="dialog-cancel">Cancel</button>
+        <button class="btn btn-primary" value="ok" id="dialog-ok">OK</button>
+      </div>
+    </form>
+  </dialog>
+
+  <noscript><p class="noscript">This practice test needs JavaScript.</p></noscript>
+
+  <!-- Classic scripts (not ES modules) so the page works straight from file://. -->
+  <script src="marking.js"></script>
+  <script src="papers/mock1.js"></script>
+  <!-- Optional paper: if this file doesn't exist yet, the browser skips it and Mock 1 still works. -->
+  <script src="papers/mock2.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
