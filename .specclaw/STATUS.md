@@ -1,11 +1,13 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** ACSD-practice
-**Last Updated:** 2026-11-23 18:28 UTC
+**Last Updated:** 2026-11-23 19:17 UTC
 
 ## Active Changes
 
-_No active changes._
+
+- 🔀 **001-acsd-ict-practice-pack** ▣ — pr raised | 11/11 tasks (100%) | 0 failed | PR #1 merged | 41m
+- 🔍 **002-js-refresher** ▫ — verify PASS | 7/7 tasks (100%) | 0 failed | 10m
 
 ## Pending Proposals
 
@@ -18,6 +20,6 @@ _None._
 
 ## Stats
 
-- **Total changes:** 1
-- **Active:** 0
+- **Total changes:** 3
+- **Active:** 2
 - **Completed:** 1
