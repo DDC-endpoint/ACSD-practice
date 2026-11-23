@@ -5,24 +5,20 @@ _Update at the end of every session: overwrite the top three sections, append to
 **Last updated:** 2026-11-23
 
 ## Current state
-- **Change `001-acsd-ict-practice-pack`: built, verify PASS (12/12 ACs), PR #1 open** at https://github.com/DDC-endpoint/ACSD-practice/pull/1, mergeable. Repo is public.
+- **Change `001-acsd-ict-practice-pack`: DONE.** Verify PASS (12/12), PR #1 merged (2026-11-23), archived, tagged `ict-pack-v1`. Repo is public.
 - Contents:
   - 11 drills (d01–d11, 88 tests), each with LESSON/HINTS PDFs
   - `exam/index.html`, a self-marking Blackboard-style page with Mock 1 (the module mock verbatim, plus a key) and Mock 2 (new questions), each 49 items and 100 marks, with Exam and Practice modes
   - `guides/REFRESHER` and `guides/EXAM-DAY` (Markdown + PDF)
   - `scripts/selfcheck.sh` → SELFCHECK PASS
 - Branches:
-  - `main` on the remote is still the init commit until PR #1 merges.
-  - `solutions` = the feature branch + the completed `drills/*/src`. It's pushed.
+  - `main` holds the pack (selfcheck PASS on main).
+  - `solutions` = `main` + the completed `drills/*/src`, synced and pushed.
 
 ## Next steps
-1. **Merge PR #1** (the user merges; my merge attempt was denied by the permission classifier). Then:
-   - `git checkout main && git pull`
-   - merge `main` into `solutions` (in a worktree), push
-   - `bash scripts/selfcheck.sh`
-   - `/specclaw:archive`
-2. Support the student through the drills and mocks before the ICT, **Wed 25 Nov 2026**. Review their marked attempts and explain wrong answers.
-3. The student's drill work will be uncommitted in their tree. Never commit it, and use worktrees for git work.
+0. **After the archive PR merges:** merge `main` into `solutions` (in a worktree), push, run `bash scripts/selfcheck.sh`.
+1. Support the student through the drills and mocks before the ICT, **Wed 25 Nov 2026**. Review their marked attempts and explain wrong answers.
+2. The student's drill work will be uncommitted in their tree. Never commit it, and use worktrees for git work.
 
 ## Open questions
 - The ICT start time and room (not given).
@@ -39,3 +35,4 @@ _Update at the end of every session: overwrite the top three sections, append to
     - an untracked `.lock`
     - the d08 hint wording (prefix matching)
   - `specclaw-build finalize` merged locally and deleted the branch even though the selfcheck failed. That was undone (local only) and redone via `/specclaw:pr`.
+- **2026-11-23 (later):** The user merged PR #1. Merged `main` into `solutions`, selfcheck PASS on main, archived 001 (archive PR), tagged `ict-pack-v1`.

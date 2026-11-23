@@ -1,0 +1,7 @@
+exit=0
+duration_s=25
+log=.specclaw/changes/001-acsd-ict-practice-pack/logs/test-bash-scripts-selfcheck-sh-427.log
+head=9f7020996701895d1e3f2a39362f6ff5e259d244
+dirty=true
+cmd=bash scripts/selfcheck.sh
+interrupted=false
