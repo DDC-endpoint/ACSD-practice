@@ -12,8 +12,9 @@
 | Spec | ✅ Done |  |
 | Design | ✅ Done |  |
 | Tasks | ✅ Done |  |
-| Build | 🔨 In-progress |  |
-| Verify | ⏳ Pending |  |
+| Build | ❌ Failed | 11/11 tasks |
+| Verify | ✅ Passed | PASS |
+| PR | ✅ Raised | https://github.com/DDC-endpoint/ACSD-practice/pull/1 |
 
 ## Task Progress
 

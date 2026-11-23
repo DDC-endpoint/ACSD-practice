@@ -196,7 +196,7 @@ Inside the hook, before `useMutation`: `const queryClient = useQueryClient();`. 
 
 <details><summary>Hint 4: invalidateQueries "does nothing"</summary>
 
-v5 takes an **object**: `invalidateQueries({ queryKey: ["products"] })`. And the key must match the one in `useProducts` exactly (`"products"`, not `"product"`).
+v5 takes an **object**: `invalidateQueries({ queryKey: ["products"] })`. And the key must start with the same key as `useProducts` (`"products"`, not `"product"`): matching is by prefix, so `["products"]` also refreshes `["products", 7]`.
 </details>
 
 <details><summary>Hint 5: TypeScript says data might be undefined</summary>
