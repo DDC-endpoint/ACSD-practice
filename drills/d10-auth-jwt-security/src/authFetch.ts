@@ -23,13 +23,21 @@ export async function authFetch<T>(
   onUnauthorized: () => void,
   init: RequestInit = {},
 ): Promise<T> {
-  // TODO d10-4:
-  //  1. copy init.headers into `new Headers(...)` and, if there is a token, set
-  //     "Authorization" to `Bearer <token>`
-  //  2. await fetch(url, { ...init, headers })
-  //  3. 401 -> call onUnauthorized(), then throw new ApiError(401, ...)
-  //     403 -> throw new ApiError(403, "Forbidden ...")   (do NOT log the user out)
-  //     other !response.ok -> throw new ApiError(response.status, ...)
-  //  4. 204 -> return undefined as T; otherwise return the parsed JSON
-  throw new Error("TODO d10-4");
+  const headers = new Headers(init.headers);
+  if (token) headers.set("Authorization", `Bearer ${token}`);
+
+  const response = await fetch(url, { ...init, headers });
+
+  if (response.status === 401) {
+    onUnauthorized();
+    throw new ApiError(401, "Unauthorised: please sign in again.");
+  }
+  if (response.status === 403) {
+    throw new ApiError(403, "Forbidden: you do not have permission to do this.");
+  }
+  if (!response.ok) {
+    throw new ApiError(response.status, `Request failed (HTTP ${response.status}).`);
+  }
+  if (response.status === 204) return undefined as T;
+  return (await response.json()) as T;
 }

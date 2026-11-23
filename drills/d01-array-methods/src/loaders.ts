@@ -32,7 +32,12 @@ export async function loadCheckoutOneByOne(api: ShopApi): Promise<Checkout> {
 //   destructure the three results, and return a Checkout (total = basketTotal(items)).
 //   If any one request fails, this function should fail too (that's what Promise.all does).
 export async function loadCheckout(api: ShopApi): Promise<Checkout> {
-  throw new Error("TODO d01-6");
+  const [user, items, offers] = await Promise.all([
+    api.loadUser(),
+    api.loadBasket(),
+    api.loadOffers(),
+  ]);
+  return { user, items, offers, total: basketTotal(items) };
 }
 
 export interface LoadReport<T> {
@@ -43,5 +48,15 @@ export interface LoadReport<T> {
 // TODO d01-7: run every loader in parallel with Promise.allSettled, so one failure does NOT
 //   sink the rest. Collect the fulfilled values (in order) and count the rejected ones.
 export async function loadWhatWeCan<T>(loaders: Array<() => Promise<T>>): Promise<LoadReport<T>> {
-  throw new Error("TODO d01-7");
+  const results = await Promise.allSettled(loaders.map((load) => load()));
+  const values: T[] = [];
+  let failed = 0;
+  for (const result of results) {
+    if (result.status === "fulfilled") {
+      values.push(result.value);
+    } else {
+      failed++;
+    }
+  }
+  return { values, failed };
 }

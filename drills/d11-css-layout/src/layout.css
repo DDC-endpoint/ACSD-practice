@@ -11,27 +11,58 @@ body {
   border-radius: 8px;
 }
 
-/* TODO d11-1: .page
-   - display: grid
-   - a 2-column grid (e.g. grid-template-columns: 200px 1fr)
-   - grid-template-areas with 3 quoted rows: header across the top,
-     sidebar + main in the middle, footer across the bottom
-     (every row must have the same number of columns) */
+/* d11-1: the page grid, with named areas */
+.page {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-areas:
+    "header  header"
+    "sidebar main"
+    "footer  footer";
+  min-height: 100vh;
+  gap: 1rem;
+}
 
-/* TODO d11-2: place .page-header, .page-sidebar, .page-main and .page-footer
-   in their areas with grid-area (header / sidebar / main / footer) */
+/* d11-2: put each child in its area */
+.page-header {
+  grid-area: header;
+}
+.page-sidebar {
+  grid-area: sidebar;
+}
+.page-main {
+  grid-area: main;
+}
+.page-footer {
+  grid-area: footer;
+}
 
-/* TODO d11-3: .cards
-   - display: grid
-   - grid-template-columns: as many columns as fit, each at least 200px and
-     sharing the leftover space: repeat(auto-fit, minmax(...)) */
+/* d11-3: responsive card grid, no media query needed */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
 
-/* TODO d11-4: h1 font-size that grows with the viewport (4vw)
-   but never goes below 1.5rem or above 3rem. One function does this. */
+/* d11-4: fluid heading size */
+h1 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
 
-/* TODO d11-5: a clearly visible outline on :focus-visible (keyboard focus).
-   Do NOT remove focus outlines globally (no `*:focus { outline: none }`). */
+/* d11-5: a visible focus ring for keyboard users */
+:focus-visible {
+  outline: 3px solid #1a5fb4;
+  outline-offset: 2px;
+}
 
-/* TODO d11-6: @media (max-width: 600px)
-   re-declare .page with ONE column: 1fr, and areas stacked one per row
-   (header, main, sidebar, footer) */
+/* d11-6: one column on small screens */
+@media (max-width: 600px) {
+  .page {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main"
+      "sidebar"
+      "footer";
+  }
+}

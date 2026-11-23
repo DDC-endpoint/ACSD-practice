@@ -7,5 +7,28 @@ import { saveSettings } from "../settings";
 //   When Save is clicked: call saveSettings({ darkMode }), THEN send the user
 //   to the home page "/" with useNavigate (no <Link>: this is navigation from code).
 export function SettingsPage() {
-  return <p>TODO d05-4</p>;
+  const [darkMode, setDarkMode] = useState(false);
+  const navigate = useNavigate();
+
+  function handleSave() {
+    saveSettings({ darkMode });
+    navigate("/");
+  }
+
+  return (
+    <section>
+      <h1>Settings</h1>
+      <label>
+        <input
+          type="checkbox"
+          checked={darkMode}
+          onChange={(e) => setDarkMode(e.target.checked)}
+        />{" "}
+        Dark mode
+      </label>
+      <button type="button" onClick={handleSave}>
+        Save
+      </button>
+    </section>
+  );
 }

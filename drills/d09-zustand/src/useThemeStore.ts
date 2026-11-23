@@ -13,14 +13,6 @@ export interface ThemeState {
 export const useThemeStore = create<ThemeState>()((set) => ({
   theme: "light",
   menuOpen: false,
-  // TODO d09-1: write both actions with set(...):
-  //   - toggleTheme: flip "light" <-> "dark" (use the set((state) => ({ ... })) form,
-  //     because the new value depends on the old one)
-  //   - setTheme: set theme to the value passed in (set({ ... }) is enough)
-  toggleTheme: () => {
-    throw new Error("TODO d09-1");
-  },
-  setTheme: () => {
-    throw new Error("TODO d09-1");
-  },
+  toggleTheme: () => set((state) => ({ theme: state.theme === "light" ? "dark" : "light" })),
+  setTheme: (theme) => set({ theme }),
 }));

@@ -12,10 +12,13 @@ interface RequireAuthProps {
 }
 
 export default function RequireAuth({ token, role, children }: RequireAuthProps) {
-  // TODO d10-5:
-  //  - no token, or isTokenExpired(token) -> <Navigate to="/login" replace state={{ from: location }} />
-  //    (get `location` from useLocation(), so the login page knows where to send the user back)
-  //  - `role` given but hasRole(token, role) is false -> a message containing "403 Not authorised"
-  //  - otherwise render `children` if given, else <Outlet /> (the matched child route)
-  return <p>TODO d10-5</p>;
+  const location = useLocation();
+
+  if (!token || isTokenExpired(token)) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
+  if (role && !hasRole(token, role)) {
+    return <p role="alert">403 Not authorised</p>;
+  }
+  return children ? <>{children}</> : <Outlet />;
 }

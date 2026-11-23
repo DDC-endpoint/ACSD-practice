@@ -8,20 +8,39 @@ interface Props {
 }
 
 export function CoursePage({ course, loading }: Props) {
-  // TODO d03-2: state, early returns and the tab bar.
-  //   1. Declare the selected tab with useState<TabId>, starting at "overview".
-  //      (Call the Hook FIRST, before any `return`, or you break the Rules of Hooks.)
-  //   2. EARLY RETURNS: if loading -> <p>Loading course…</p>
-  //                     if course is null -> <p>Course not found.</p>
-  //   3. Return a <section> with:
-  //      - <h1> with course.title
-  //      - one <button> per entry in TABS (use TABS.map, key={t.id}), showing t.label;
-  //        onClick sets the selected tab to t.id. Optional: aria-pressed={tab === t.id}
-  //      - Overview tab, using &&:  {tab === "overview" && <p>{course.description}</p>}
-  //      - Modules tab, using &&:   <ModuleList modules={course.modules} />
-  //
-  // TODO d03-3: the Reviews tab, using a TERNARY inside `tab === "reviews" && (...)`:
-  //      - reviews exist -> <ul> with one <li key={r.id}> per review: "Author: text"
-  //      - no reviews    -> <p>No reviews yet.</p>
-  return <p>TODO d03-2</p>;
+  const [tab, setTab] = useState<TabId>("overview");
+
+  if (loading) return <p>Loading course…</p>;
+  if (course === null) return <p>Course not found.</p>;
+
+  return (
+    <section>
+      <h1>{course.title}</h1>
+
+      <nav>
+        {TABS.map((t) => (
+          <button key={t.id} aria-pressed={tab === t.id} onClick={() => setTab(t.id)}>
+            {t.label}
+          </button>
+        ))}
+      </nav>
+
+      {tab === "overview" && <p>{course.description}</p>}
+
+      {tab === "modules" && <ModuleList modules={course.modules} />}
+
+      {tab === "reviews" &&
+        (course.reviews.length > 0 ? (
+          <ul>
+            {course.reviews.map((r) => (
+              <li key={r.id}>
+                {r.author}: {r.text}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No reviews yet.</p>
+        ))}
+    </section>
+  );
 }

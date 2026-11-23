@@ -9,5 +9,30 @@ import { BOOKS } from "../books";
 //   - Render a <ul> with one <li> per book whose title contains q (ignore case),
 //     each holding <Link to={`/books/${book.id}`}>{book.title}</Link>.
 export function BookList() {
-  return <p>TODO d05-5</p>;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const q = searchParams.get("q") ?? "";
+  const shown = BOOKS.filter((b) =>
+    b.title.toLowerCase().includes(q.toLowerCase()),
+  );
+
+  return (
+    <section>
+      <h1>Books</h1>
+      <input
+        type="search"
+        aria-label="Search books"
+        value={q}
+        onChange={(e) =>
+          setSearchParams(e.target.value ? { q: e.target.value } : {})
+        }
+      />
+      <ul>
+        {shown.map((book) => (
+          <li key={book.id}>
+            <Link to={`/books/${book.id}`}>{book.title}</Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }

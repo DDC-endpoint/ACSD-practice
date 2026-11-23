@@ -3,8 +3,12 @@ import { updateProduct } from "./productApi";
 import type { Product } from "./types";
 
 export function useUpdateProduct(): UseMutationResult<Product, Error, Product> {
-  // TODO d08-2: get the client with useQueryClient(), then return useMutation({ ... }) with:
-  //   - mutationFn: updateProduct
-  //   - onSuccess: invalidate the ["products"] query so the list is fetched again
-  throw new Error("TODO d08-2");
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateProduct,
+    onSuccess: () => {
+      // Mark every ["products"] query stale and refetch the ones on screen.
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
 }

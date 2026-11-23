@@ -17,18 +17,39 @@ export function EventForm({ onCreate }: EventFormProps) {
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    // TODO d07-5 (part 1): stop the page reload, validate `values`, store the errors
-    //   with setErrors, and return early if there are any.
-    //   Only when valid: await onCreate({ name, location, maxAttendees }) with the
-    //   text trimmed and maxAttendees turned into a number.
+    e.preventDefault(); // stop the browser reloading the page
+    const found = validateEvent(values);
+    setErrors(found);
+    if (Object.keys(found).length > 0) return; // invalid: don't submit
+
+    await onCreate({
+      name: values.name.trim(),
+      location: values.location.trim(),
+      maxAttendees: Number(values.maxAttendees),
+    });
   }
 
-  // TODO d07-5 (part 2): replace the placeholder with a <form onSubmit={handleSubmit} noValidate>
-  //   holding three CONTROLLED inputs (value={values.x} onChange={handleChange}, plus a name
-  //   attribute that matches the field). Labels (the tests look for these exact texts):
-  //     "Event name" (id/name "name"), "Location" (id/name "location"),
-  //     "Maximum attendees" (id/name "maxAttendees", type="number").
-  //   Under each input: {errors.x && <p role="alert">{errors.x}</p>}
-  //   And a <button type="submit">Create event</button>.
-  return <p>TODO d07-5</p>;
+  return (
+    <form onSubmit={handleSubmit} noValidate>
+      <label htmlFor="name">Event name</label>
+      <input id="name" name="name" value={values.name} onChange={handleChange} />
+      {errors.name && <p role="alert">{errors.name}</p>}
+
+      <label htmlFor="location">Location</label>
+      <input id="location" name="location" value={values.location} onChange={handleChange} />
+      {errors.location && <p role="alert">{errors.location}</p>}
+
+      <label htmlFor="maxAttendees">Maximum attendees</label>
+      <input
+        id="maxAttendees"
+        name="maxAttendees"
+        type="number"
+        value={values.maxAttendees}
+        onChange={handleChange}
+      />
+      {errors.maxAttendees && <p role="alert">{errors.maxAttendees}</p>}
+
+      <button type="submit">Create event</button>
+    </form>
+  );
 }

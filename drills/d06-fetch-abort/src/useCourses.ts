@@ -13,14 +13,26 @@ export function useCourses(): CoursesState {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // TODO d06-4: load the courses once, when the component mounts:
-  //   useEffect(() => { ... }, []) with:
-  //   1. const controller = new AbortController();
-  //   2. an async function that awaits getCourses(controller.signal), then
-  //      setCourses + setLoading(false). On an error: setError(message) + setLoading(false),
-  //      BUT if the request was aborted (controller.signal.aborted, or err.name === "AbortError")
-  //      return without touching state.
-  //   3. call it, and return a cleanup function that calls controller.abort().
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function load() {
+      try {
+        const data = await getCourses(controller.signal);
+        setCourses(data);
+        setLoading(false);
+      } catch (err) {
+        // We cancelled it ourselves (unmount), so fetch rejected with an AbortError.
+        // That's not a real error, and the component is gone: don't touch state.
+        if (controller.signal.aborted) return;
+        setError(err instanceof Error ? err.message : "Something went wrong.");
+        setLoading(false);
+      }
+    }
+
+    load();
+    return () => controller.abort(); // cleanup: runs on unmount
+  }, []);
 
   return { courses, loading, error };
 }

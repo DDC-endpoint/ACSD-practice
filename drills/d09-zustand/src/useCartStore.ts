@@ -16,25 +16,23 @@ export interface CartState {
 
 export const useCartStore = create<CartState>()((set) => ({
   items: [],
-  // TODO d09-3: write the three actions. Never change state.items in place:
-  // always return a NEW array from set((state) => ({ items: ... })).
-  //   - addItem: if an item with that id is already there, map() it to quantity + 1;
-  //     otherwise add { ...product, quantity: 1 } to the end.
-  //   - removeItem: filter() out the item with that id.
-  //   - clear: set items back to [].
-  addItem: () => {
-    throw new Error("TODO d09-3");
-  },
-  removeItem: () => {
-    throw new Error("TODO d09-3");
-  },
-  clear: () => {
-    throw new Error("TODO d09-3");
-  },
+  addItem: (product) =>
+    set((state) => {
+      const existing = state.items.find((item) => item.id === product.id);
+      if (existing) {
+        return {
+          items: state.items.map((item) =>
+            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item,
+          ),
+        };
+      }
+      return { items: [...state.items, { ...product, quantity: 1 }] };
+    }),
+  removeItem: (id) => set((state) => ({ items: state.items.filter((item) => item.id !== id) })),
+  clear: () => set({ items: [] }),
 }));
 
 // A selector: takes the whole state, returns just the bit a component needs.
-export const selectItemCount = (state: CartState): number => {
-  // TODO d09-4: return the total quantity of all items (use reduce, starting at 0).
-  throw new Error("TODO d09-4");
-};
+// Here it derives a value (total quantity) instead of storing it.
+export const selectItemCount = (state: CartState): number =>
+  state.items.reduce((sum, item) => sum + item.quantity, 0);

@@ -2,11 +2,17 @@
 
 // TODO d02-3: a type alias that allows ONLY these three values:
 //   "pending", "shipped", "delivered"
-//   (string is a placeholder so the file compiles. Replace it.)
-export type OrderStatus = string;
+export type OrderStatus = "pending" | "shipped" | "delivered";
 
 // TODO d02-3: switch on the status and return:
 //   pending -> "Waiting to ship", shipped -> "On its way", delivered -> "Delivered"
 export function statusLabel(status: OrderStatus): string {
-  throw new Error("TODO d02-3");
+  switch (status) {
+    case "pending":
+      return "Waiting to ship";
+    case "shipped":
+      return "On its way";
+    case "delivered":
+      return "Delivered";
+  }
 }

@@ -27,23 +27,28 @@ export function base64UrlToText(part: string): string {
 
 /** Returns the payload (middle part) as an object, or null if the token is malformed. */
 export function decodeJwtPayload(token: string): JwtPayload | null {
-  // TODO d10-1: split the token on "." (it must have exactly 3 parts, else return null).
-  // Decode the MIDDLE part with base64UrlToText(), then JSON.parse it.
-  // Return null if decoding/parsing throws (try/catch) or the result isn't a plain object.
-  throw new Error("TODO d10-1");
+  const parts = token.split(".");
+  if (parts.length !== 3) return null;
+  try {
+    const payload: unknown = JSON.parse(base64UrlToText(parts[1]));
+    if (payload === null || typeof payload !== "object" || Array.isArray(payload)) return null;
+    return payload as JwtPayload;
+  } catch {
+    return null;
+  }
 }
 
 /** true when the token is expired, has no numeric exp, or can't be decoded. */
 export function isTokenExpired(token: string, nowMs: number = Date.now()): boolean {
-  // TODO d10-2: decode the payload. No payload, or exp that isn't a number -> expired (true).
-  // exp is in SECONDS, nowMs is in MILLISECONDS: convert before comparing.
-  // A token is expired from the exact moment exp is reached.
-  throw new Error("TODO d10-2");
+  const payload = decodeJwtPayload(token);
+  if (!payload || typeof payload.exp !== "number") return true;
+  return payload.exp * 1000 <= nowMs;
 }
 
 /** true when the token's role claim (a string or an array of strings) contains `role`. */
 export function hasRole(token: string, role: string): boolean {
-  // TODO d10-3: read payload.role. It may be a string ("ADMIN") or an array (["USER", "ADMIN"]).
-  // Return true if it equals / includes `role`. No role claim or a bad token -> false.
-  throw new Error("TODO d10-3");
+  const claim = decodeJwtPayload(token)?.role;
+  if (typeof claim === "string") return claim === role;
+  if (Array.isArray(claim)) return claim.includes(role);
+  return false;
 }

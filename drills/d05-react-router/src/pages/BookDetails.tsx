@@ -6,5 +6,20 @@ import { BOOKS } from "../books";
 //   Then look the book up in BOOKS (careful: URL params are strings, ids are numbers)
 //   and render <p>{title} by {author}</p>, or <p>No book with that ID.</p> if none matches.
 export function BookDetails() {
-  return <p>TODO d05-3</p>;
+  const { bookId } = useParams();
+  const book = BOOKS.find((b) => b.id === Number(bookId));
+
+  return (
+    <section>
+      <h1>Book details</h1>
+      <p>Book ID: {bookId}</p>
+      {book ? (
+        <p>
+          {book.title} by {book.author}
+        </p>
+      ) : (
+        <p>No book with that ID.</p>
+      )}
+    </section>
+  );
 }

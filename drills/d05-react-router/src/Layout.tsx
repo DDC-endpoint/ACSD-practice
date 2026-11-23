@@ -6,5 +6,18 @@ import { NavLink, Outlet } from "react-router-dom";
 //       "Books" -> "/books", "Settings" -> "/settings"
 //   - <main> containing <Outlet />, the slot where the matched child route renders.
 export function Layout() {
-  return <p>TODO d05-1</p>;
+  return (
+    <>
+      <nav aria-label="Main">
+        <NavLink to="/" end>
+          Home
+        </NavLink>{" "}
+        <NavLink to="/books">Books</NavLink>{" "}
+        <NavLink to="/settings">Settings</NavLink>
+      </nav>
+      <main>
+        <Outlet />
+      </main>
+    </>
+  );
 }

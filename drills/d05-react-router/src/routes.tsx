@@ -12,7 +12,17 @@ import { NotFound } from "./pages/NotFound";
 //     "settings" -> <SettingsPage />, and a catch-all "*" -> <NotFound />.
 //   The <BrowserRouter> is NOT here: main.tsx (or the test's MemoryRouter) wraps it.
 export function AppRoutes() {
-  return <p>TODO d05-2</p>;
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="books" element={<BookList />} />
+        <Route path="books/:bookId" element={<BookDetails />} />
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  );
 }
 
 // TODO d05-6: the SAME tree as an object array, the form createBrowserRouter(routes) takes.
@@ -21,5 +31,15 @@ export function AppRoutes() {
 //   with { path: "*", element: <NotFound /> }.
 //   In a real app: const router = createBrowserRouter(routes); <RouterProvider router={router} />
 export const routes: RouteObject[] = [
-  { path: "*", element: <p>TODO d05-6</p> }, // placeholder: replace this whole array
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "books", element: <BookList /> },
+      { path: "books/:bookId", element: <BookDetails /> },
+      { path: "settings", element: <SettingsPage /> },
+      { path: "*", element: <NotFound /> },
+    ],
+  },
 ];
