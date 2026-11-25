@@ -145,43 +145,6 @@ function PreferencesForm() {
 <h3>Template 4: Fetch on load with AbortController (D2b, 6 marks)</h3>
 <pre><code>import { useEffect, useState } from 'react';
 
-interface Course { id: number; title: string; }
-
-export function CourseCount() {
-  const [courses, setCourses] = useState&lt;Course[]&gt;([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState&lt;string | null&gt;(null);
-
-  useEffect(() =&gt; {
-    const controller = new AbortController();
-
-    async function load() {
-      try {
-        const res = await fetch('https://example.com/api/courses', {
-          signal: controller.signal,
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data: Course[] = await res.json();
-        setCourses(data);
-      } catch (err) {
-        if (controller.signal.aborted) return;   // unmounted: touch no state
-        setError(err instanceof Error ? err.message : 'Request failed');
-      } finally {
-        if (!controller.signal.aborted) setLoading(false);
-      }
-    }
-
-    load();
-    return () =&gt; controller.abort();   // cleanup runs on unmount
-  }, []);
-
-  if (loading) return &lt;p&gt;Loading courses...&lt;/p&gt;;
-  if (error) return &lt;p&gt;Error: {error}&lt;/p&gt;;
-  return &lt;p&gt;There are {courses.length} courses.&lt;/p&gt;;
-}</code></pre>
-<p class="small" style="break-after: avoid;"><strong>Plain JS (no types)</strong></p>
-<pre><code>import { useEffect, useState } from 'react';
-
 export function CourseCount() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -214,6 +177,7 @@ export function CourseCount() {
   if (error) return &lt;p&gt;Error: {error}&lt;/p&gt;;
   return &lt;p&gt;There are {courses.length} courses.&lt;/p&gt;;
 }</code></pre>
+<p class="small"><strong>If the question asks for TypeScript:</strong> add <code>interface Course { id: number; title: string; }</code> above the component, then write <code>useState&lt;Course[]&gt;([])</code> and <code>useState&lt;string | null&gt;(null)</code>. Nothing else changes.</p>
 <div class="box"><strong>Skeleton to say out loud:</strong> 3 states → the effect → the controller → <code>async function load</code> with try / catch / finally → call <code>load()</code> → return the abort → 3 <code>if</code>/<code>return</code>s.</div>
 <table>
 <tr><th>Requirement</th><th>Code that meets it</th></tr>
@@ -275,21 +239,20 @@ export function CourseCount() {
 <p>POST sends a new record to the collection URL (<code>/api/events</code>). The server creates it, assigns its id and usually replies 201, so sending it twice creates two events. PUT sends the full updated record to that record's own URL (<code>/api/events/7</code>) and replaces it, so it is idempotent: sending it twice gives the same result. A frontend uses POST for "create" forms and PUT (or PATCH, for a partial change) for "edit" forms.</p>
 
 <h3>C1 and C2 in one glance</h3>
-<pre><code>const total = prices.reduce((sum, p) =&gt; sum + p, 0);   // C1: 80
-
-interface Product {        // C2
+<pre><code>const total = prices.reduce((sum, p) =&gt; sum + p, 0);   // C1: 80</code></pre>
+<p class="small" style="break-after: avoid;"><strong>C2 asks for a TypeScript interface</strong>, so this one has to stay TypeScript (plain JS has no types):</p>
+<pre><code>interface Product {        // C2
   id: number;
   name: string;
   price: number;
   description?: string;    // ? = optional
 }</code></pre>
-<p class="small"><strong>Plain JS (no types):</strong> the C1 line is already plain JS, so keep it as is. C2 <code>interface</code>: Plain JS: no equivalent — types don't exist in JavaScript; delete this.</p>
 
 <h2>Part 4: TanStack Query and Zustand (D4, A11, A12, A15, B6, B7, B14, C4)</h2>
 <div class="box"><strong>The D4a rule:</strong> if the server owns the data, use <strong>TanStack Query</strong>. If the browser owns it, use <strong>Zustand</strong>. They are not interchangeable (B14 is false).</div>
 
 <h3>TanStack Query: server state (products, profiles, anything from an API)</h3>
-<pre><code>const { data, isLoading, error } = useQuery({
+<pre><code>const { data, isPending, error } = useQuery({   // v5: isPending (was isLoading)
   queryKey: ['products'],          // cache label
   queryFn: () =&gt; fetch('/api/products').then(r =&gt; r.json()),
   staleTime: 60_000,               // fresh for 60s, so no refetch
@@ -297,7 +260,11 @@ interface Product {        // C2
 
 const queryClient = useQueryClient();
 const update = useMutation({
-  mutationFn: (p) =&gt; fetch(`/api/products/${p.id}`, { method: 'PUT', body: JSON.stringify(p) }),
+  mutationFn: (p) =&gt; fetch(`/api/products/${p.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(p),
+  }),
   onSuccess: () =&gt; queryClient.invalidateQueries({ queryKey: ['products'] }),
 });</code></pre>
 <ul>
