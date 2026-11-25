@@ -1,6 +1,6 @@
 # Project Context
 
-_Last updated: 2026-11-23 (change 001 build)_
+_Last updated: 2026-11-25 (change 004-ignore-videos-folder)_
 
 ## Architecture Overview
 - One npm project at the root. Stack: React 19.3, TypeScript 6.0 (strict), react-router-dom 7.18 (same as the module's CampusEvents app), @tanstack/react-query 5, zustand 5, Vitest 5 + jsdom + Testing Library. Every version is pinned exactly.
@@ -29,6 +29,7 @@ _Last updated: 2026-11-23 (change 001 build)_
 ## Constraints
 - The exam page uses no network: no CDN, web fonts or `fetch`. It carries no Blackboard name or logo, and copies only the layout pattern.
 - `bash scripts/selfcheck.sh` must print `SELFCHECK PASS` before a PR.
+- `videos/` (the HyperFrames lesson-video project, about 1 GB) is local-only and gitignored. Never commit anything from it: the repo is public, the MP4s go over GitHub limits, and the music licence is unknown.
 
 ## Learnings from change 001 (2026-11-23)
 - **The papers follow the module mock's blueprint: 49 items** (20 MCQ + 15 TF + 5 C + 4 D + 5 E), 100 marks. Not 45.
