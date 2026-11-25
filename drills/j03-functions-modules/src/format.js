@@ -13,20 +13,16 @@ export function formatDate(iso) {
 // TODO j03-1: make formatPrice an arrow function with an implicit return (no braces, no `return`):
 //   it takes pence (1250) and gives back "£12.50".  Hint: `£${(pence / 100).toFixed(2)}`
 //   ALSO: this line is missing the word `export`. Add it so other files can import formatPrice.
-const formatPrice = (pence) => {
-  throw new Error("TODO j03-1");
-};
+export const formatPrice = (pence) => `£${(pence / 100).toFixed(2)}`;
 
 // TODO j03-2: an arrow function that returns an OBJECT: { id: event.id, label: event.title }.
 //   Careful: the object needs round brackets around it: ({ ... }). Without them the { } is read
 //   as a function body: undefined with one property, a SyntaxError (file won't load) with two.
-export const toSummary = (event) => {
-  throw new Error("TODO j03-2");
-};
+export const toSummary = (event) => ({ id: event.id, label: event.title });
 
 // TODO j03-3: this should be the DEFAULT export of the file (one per file).
 //   Add `export default` in front of `function`. It returns text like
 //   "Hack Night - 24 Nov 2026 - £5.00": title, formatDate(event.date), formatPrice(event.price).
-function formatEvent(event) {
-  throw new Error("TODO j03-3");
+export default function formatEvent(event) {
+  return `${event.title} - ${formatDate(event.date)} - ${formatPrice(event.price)}`;
 }
