@@ -39,3 +39,10 @@ _Last updated: 2026-11-23 (change 001 build)_
 - Selfcheck AC-6 skips `exam/papers/` because question text legitimately contains `fetch("https://…")`. The papers aren't code that runs.
 - `specclaw-build finalize` merges locally and deletes the branch even when `test_command` fails. In this repo, open PRs through `/specclaw:pr` instead, and keep `.specclaw/changes/*/.lock/` and `logs/` gitignored.
 - Branch `solutions` = `main` + `.staging/solutions` overlay. After a PR merges, merge `main` into `solutions` and re-run `bash scripts/selfcheck.sh`.
+
+## Learnings from change 003 (2026-11-25)
+- **Guides:** `guides/ICT-QUICK.md` is the 4-page exam sheet, with plain JS/JSX code and a TS box. `REFRESHER.md` puts a `**Plain JS:**` block after each typed snippet. `ICT-NIGHT-BEFORE.html` is hand-written HTML, printed with headless Chrome (`--print-to-pdf`), not built by `build.mjs`. Its templates are JS-first, and only C2 (the interface question) stays TS.
+- **PDF pipeline:** a guide with front matter `compact: true` renders with smaller type and margins (`body.compact` in `style.css`, the `compact` flag in `render()`). The build filter matches **folder names**, so `build.mjs guides` rebuilds every guide. Restore untouched PDFs with `git checkout --` afterwards.
+- **Selfcheck AC-4** (`git diff HEAD solutions`) always fails on a feature branch until `solutions` is synced. Prove it before merging with `git merge-tree --write-tree solutions HEAD`.
+- **TanStack v5** in the guides: `isPending`, not `isLoading`.
+- When the student has uncommitted work in the main tree, build in a separate worktree (`git worktree add ../ACSD-wtNNN`). Use junctions for `node_modules` and `scripts/pdf/node_modules`.
