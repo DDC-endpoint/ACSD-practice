@@ -1,0 +1,10 @@
+{"ev":"start","span":"propose","kind":"phase","label":"propose","at":"2026-11-25T05:40:24Z","ts":1795585224}
+{"ev":"stop","span":"propose","at":"2026-11-25T05:40:57Z","ts":1795585257,"status":"ok"}
+{"ev":"start","span":"plan","kind":"phase","label":"plan","at":"2026-11-25T06:53:09Z","ts":1795589589}
+{"ev":"stop","span":"plan","at":"2026-11-25T06:53:24Z","ts":1795589604,"status":"ok"}
+{"ev":"start","span":"W1","kind":"wave","label":"wave 1","at":"2026-11-25T06:53:42Z","ts":1795589621}
+{"ev":"start","span":"T1","kind":"task","label":"Add videos/ to .gitignore","parent":"W1","model":"direct","attempt":"1","at":"2026-11-25T06:53:42Z","ts":1795589622}
+{"ev":"stop","span":"T1","at":"2026-11-25T06:53:59Z","ts":1795589639,"status":"ok"}
+{"ev":"stop","span":"W1","at":"2026-11-25T06:53:59Z","ts":1795589639,"status":"ok"}
+{"ev":"start","span":"verify-1795589656","kind":"phase","label":"verify","at":"2026-11-25T06:54:16Z","ts":1795589656}
+{"ev":"stop","span":"verify-1795589656","at":"2026-11-25T06:55:06Z","ts":1795589706,"status":"ok"}

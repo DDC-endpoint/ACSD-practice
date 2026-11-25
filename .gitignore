@@ -7,3 +7,6 @@ coverage/
 scripts/pdf/node_modules/
 .specclaw/changes/*/.lock/
 .specclaw/changes/*/logs/
+
+# Local-only video project (~1 GB of TTS cache, renders, music); never committed
+videos/
