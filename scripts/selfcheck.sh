@@ -25,7 +25,7 @@ node -e '
 const r = require(process.argv[1]); const byDrill = {};
 let loadErr = [];
 for (const f of r.testResults) {
-  const m = f.name.split(String.fromCharCode(92)).join("/").match(/drills\/(d\d\d)[^/]*\//); if (!m) continue;
+  const m = f.name.split(String.fromCharCode(92)).join("/").match(/drills\/([dj]\d\d)[^/]*\//); if (!m) continue;
   const d = (byDrill[m[1]] ??= { fail: 0, total: 0 });
   if (f.assertionResults.length === 0) loadErr.push(f.name + ": " + (f.message || "").split("\n")[0]);
   for (const a of f.assertionResults) { d.total++; if (a.status !== "passed") d.fail++; }
@@ -50,7 +50,7 @@ if git show-ref --verify --quiet refs/heads/solutions; then
   git worktree add -q "$WT" solutions >/dev/null 2>&1
   cp -r node_modules "$WT/" 2>/dev/null
   if (cd "$WT" && npx tsc --noEmit >"$TMP/stsc.log" 2>&1 && npx vitest run >"$TMP/stest.log" 2>&1); then pass "AC-3 solutions: typecheck + all tests green"; else fail "AC-3 solutions"; tail -30 "$TMP/stsc.log" "$TMP/stest.log"; fi
-  EXTRA=$(git diff --name-only HEAD solutions | grep -vE '^drills/d[0-9]{2}-[^/]+/src/' || true)
+  EXTRA=$(git diff --name-only HEAD solutions | grep -vE '^drills/[dj][0-9]{2}-[^/]+/src/' || true)
   if [ -z "$EXTRA" ]; then pass "AC-4 solutions differs only under drills/*/src/"; else fail "AC-4 solutions touches: $EXTRA"; fi
 else
   echo "SKIP  AC-3/AC-4 (no solutions branch yet)"

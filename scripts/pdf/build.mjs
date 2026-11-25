@@ -128,8 +128,8 @@ function guideHtml(doc) {
 // ---------- HTML → PDF ----------
 const CSS = readFileSync(new URL('./style.css', import.meta.url), 'utf8');
 const HLJS_CSS = readFileSync(new URL('./node_modules/highlight.js/styles/github-dark.css', import.meta.url), 'utf8');
-const page = (title, body) => `<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title>
-<style>${HLJS_CSS}\n${CSS}</style></head><body><main>${body}</main></body></html>`;
+const page = (title, body, bodyClass = '') => `<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title>
+<style>${HLJS_CSS}\n${CSS}</style></head><body${bodyClass ? ` class="${bodyClass}"` : ''}><main>${body}</main></body></html>`;
 
 const footer = (label) => `<div style="font-family:'Segoe UI',Arial,sans-serif;font-size:8px;color:#6b7280;width:100%;padding:0 16mm;display:flex;justify-content:space-between;">
   <span>${esc(label)}</span><span>page <span class="pageNumber"></span> of <span class="totalPages"></span></span></div>`;
@@ -153,7 +153,7 @@ function findBrowser() {
   return hit;
 }
 
-async function render(browser, html, outRel, label) {
+async function render(browser, html, outRel, label, compact = false) {
   const tab = await browser.newPage();
   await tab.setContent(html, { waitUntil: 'load' });
   await tab.pdf({
@@ -163,7 +163,7 @@ async function render(browser, html, outRel, label) {
     displayHeaderFooter: true,
     headerTemplate: '<div></div>',
     footerTemplate: footer(label),
-    margin: { top: '16mm', bottom: '18mm', left: '16mm', right: '16mm' },
+    margin: compact ? { top: '10mm', bottom: '13mm', left: '11mm', right: '11mm' } : { top: '16mm', bottom: '18mm', left: '16mm', right: '16mm' },
   });
   await tab.close();
   console.log(`  ${outRel.replace(/\\/g, '/')}`);
@@ -178,13 +178,13 @@ const browser = await puppeteer.launch({ executablePath: findBrowser(), headless
 try {
   for (const s of todo) {
     const doc = parseDoc(s.src);
-    const id = String(doc.meta.id ?? basename(s.dir)).toUpperCase().replace(/^D/, 'd');
+    const id = String(doc.meta.id ?? basename(s.dir)).toUpperCase().replace(/^([DJ])/, (c) => c.toLowerCase());
     if (s.kind === 'drill') {
       await render(browser, page(`${id} · Lesson`, lessonHtml(doc, id)), join(s.dir, 'LESSON.pdf'), `${id} · Lesson · ${doc.meta.title ?? ''}`);
       await render(browser, page(`${id} · Hints`, hintsHtml(doc, id)), join(s.dir, 'HINTS.pdf'), `${id} · Hints & viva answers`);
     } else if (s.kind === 'guide') {
       const title = String(doc.meta.title ?? id);
-      await render(browser, page(title, guideHtml(doc)), join(s.dir, s.out), title);
+      await render(browser, page(title, guideHtml(doc), doc.meta.compact ? 'compact' : ''), join(s.dir, s.out), title, Boolean(doc.meta.compact));
     } else {
       await render(browser, page(`${id} · Paper`, paperHtml(doc)), join(s.dir, 'PAPER.pdf'), String(doc.meta.title ?? id));
     }

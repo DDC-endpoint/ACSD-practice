@@ -23,6 +23,19 @@ Practice for the **5COSC026W Advanced Client-Side Development in-class test (ICT
 
 > Get updates any time with `git pull`. Stay on `main`; never work on the `solutions` branch.
 
+## 0 · Start here if JavaScript is new
+
+Every drill from d01 on assumes you can already read modern JavaScript: arrow functions, destructuring, spread, `import`/`export` and `async`/`await`. If that's shaky, do these four short **pure-JavaScript** drills first. They work exactly like the others (TODOs, tests that go from red to green, hints, viva questions), with no React and no types:
+
+| Drill | Skill | Leads into | Min |
+|---|---|---|---|
+| j01 | basics: `let`/`const`, types and `typeof`, `===`, truthy/falsy, if/ternary, loops, functions | everything | 20 |
+| j02 | objects and arrays: destructuring, spread (copy, don't mutate), rest, template literals, `?.` and `??` | d03, d09 (state updates) | 25 |
+| j03 | functions and modules: arrow functions, callbacks, functions as values, named vs default `import`/`export` | d01, d03, d05 | 20 |
+| j04 | async: Promises, `async`/`await`, `try`/`catch`, `fetch` + `res.ok` + `res.json()`, POST with `JSON.stringify` | d06, d07 | 25 |
+
+Run them like any drill: `npm test -- j01`. Keep the **[JavaScript refresher](guides/JS-REFRESHER.pdf)** ([Markdown](guides/JS-REFRESHER.md)) open to look things up as you go. Then carry on with d01.
+
 ## 1 · Do a drill
 
 1. Open `drills/dNN-…/LESSON.md`. In VS Code, use **Open Preview** (`Ctrl+Shift+V`). Read **The idea** and the **Worked example**.
@@ -70,13 +83,17 @@ Open **`exam/index.html`** in Chrome or Edge: double-click it, or drag it into t
 
 ## 3 · Guides
 
+- **[JavaScript refresher](guides/JS-REFRESHER.pdf)** ([Markdown](guides/JS-REFRESHER.md)): start here if JavaScript is new. It covers basics, objects and arrays, functions and modules, and async/fetch, each with a snippet and where it shows up in React code, plus a JS traps table. It goes with drills j01–j04.
 - **[Exam-day guide](guides/EXAM-DAY.pdf)** ([Markdown](guides/EXAM-DAY.md)): the format, a minute-by-minute plan, MCQ/TF traps, how to write code answers in a text box, and a night-before checklist.
-- **[Concept refresher](guides/REFRESHER.pdf)** ([Markdown](guides/REFRESHER.md)): every mock topic, each with a snippet and an **"In the exam:"** one-liner, plus a table of MCQ traps. Read it on the morning of the test.
+- **[Concept refresher](guides/REFRESHER.pdf)** ([Markdown](guides/REFRESHER.md)): every mock topic, each with a snippet and an **"In the exam:"** one-liner, plus a table of MCQ traps. Read it on the morning of the test. Each TypeScript snippet is followed by a **Plain JS** version.
+- **[ICT quick sheet](guides/ICT-QUICK.pdf)** ([Markdown](guides/ICT-QUICK.md)): the 4-page last read before the test. It has one-line rules, keyword → answer pairs, and the code templates in plain JavaScript/JSX, plus a box showing where the types go.
+- **[Night-before sheet](guides/ICT-NIGHT-BEFORE.pdf)** ([HTML](guides/ICT-NIGHT-BEFORE.html)): the night-before revision pack. The `CourseCount` template has a plain-JS version too.
 
 ## The plan (Mon 23 → Wed 25 Nov)
 
 | When | Do |
 |---|---|
+| **New to JS? First** | j01 → j02 → j03 → j04 (about 90 min), with the JS refresher open. Then pick up the plan below wherever you are. |
 | Mon night | d01, d02 (warm-up: arrays + types). Then sleep. |
 | Tue morning | d05 → d06 → d07. These are D1/D2/D3, worth 30 marks. |
 | Tue midday | d08 → d09 (D4 + C4), then d10 (Section E + B15). |
@@ -85,6 +102,7 @@ Open **`exam/index.html`** in Chrome or Edge: double-click it, or drag it into t
 | Wed morning | **Mock 2** in Practice mode (or Exam if there's time). Then the refresher's **Traps** table on the way in. |
 
 **If you're behind:**
+0. New to JS and short on time? Do j02 and j04 (the two that React code leans on most), then go straight to d05–d09.
 1. Never skip d05–d09: they carry Section D (40 marks).
 2. Read d03/d04/d11 instead of coding them.
 3. Always sit Mock 1 timed.
