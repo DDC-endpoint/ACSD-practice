@@ -2,7 +2,7 @@
 
 _Update at the end of every session: overwrite the top three sections, append to the log._
 
-**Last updated:** 2026-11-23
+**Last updated:** 2026-11-25
 
 ## Current state
 - **Change `001-acsd-ict-practice-pack`: DONE.** Verify PASS (12/12), PR #1 merged (2026-11-23), archived, tagged `ict-pack-v1`. Repo is public.
@@ -16,6 +16,7 @@ _Update at the end of every session: overwrite the top three sections, append to
   - `solutions` = `main` + the completed `drills/*/src`, synced and pushed.
 
 ## Next steps
+0a. **Change `004-ignore-videos-folder`: PR #4 open, verify PASS.** It adds `videos/` to `.gitignore`. After it merges, `git pull` in the main tree and merge `main` into `solutions` (selfcheck AC-4 fails until then; `merge-tree` is already proven clean). Worktree `../ACSD-wt004` can then be removed.
 0. **After the archive PR merges:** merge `main` into `solutions` (in a worktree), push, run `bash scripts/selfcheck.sh`.
 1. Support the student through the drills and mocks before the ICT, **Wed 25 Nov 2026**. Review their marked attempts and explain wrong answers.
 2. The student's drill work will be uncommitted in their tree. Never commit it, and use worktrees for git work.
@@ -36,3 +37,6 @@ _Update at the end of every session: overwrite the top three sections, append to
     - the d08 hint wording (prefix matching)
   - `specclaw-build finalize` merged locally and deleted the branch even though the selfcheck failed. That was undone (local only) and redone via `/specclaw:pr`.
 - **2026-11-23 (later):** The user merged PR #1. Merged `main` into `solutions`, selfcheck PASS on main, archived 001 (archive PR), tagged `ict-pack-v1`.
+- **2026-11-25:**
+  - Q: is the ICT open book? No module doc says. The mock's instructions are silent on notes. Advised assuming closed book; `EXAM-DAY.md:81` ("no notes and no AI") is our assumption, not a module rule.
+  - About 1,160 pending files were all from the untracked `videos/` project (~1 GB). The user chose to ignore all of it. Change 004 was proposed (panel skipped by the user) and sized bounded, then planned, built in worktree `../ACSD-wt004`, verified PASS and opened as PR #4.
