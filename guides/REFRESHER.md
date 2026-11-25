@@ -108,6 +108,21 @@ async function loadUser(id: number) {
 }
 ```
 
+**Plain JS:**
+
+```js
+async function loadUser(id) {
+  try {
+    const res = await fetch(`/api/users/${id}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();          // res.json() is a Promise too
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+```
+
 **In the exam:** an `async` function always returns a Promise, and `await` pauses only that function until the Promise settles, without blocking the UI.
 
 ### Promise.all vs Promise.allSettled (A7)
@@ -159,6 +174,8 @@ interface Product {
 }
 ```
 
+*Plain JS: no equivalent — types don't exist in JavaScript; delete this.*
+
 - `description?: string` is an **optional** property: it may be missing. Its type is `string | undefined`, so read it safely with `product.description ?? 'No description'` or `product.description?.length`.
 - Use it for typing API data: `const products: Product[] = await res.json();` and `useState<Product[]>([])`.
 - Use it for props: `interface ProductCardProps { product: Product; onSelect?: (id: number) => void }`.
@@ -176,6 +193,8 @@ type Theme = 'light' | 'dark';
 type Point = { x: number; y: number };
 type NewProduct = Omit<Product, 'id'>;   // everything except id (for a POST body)
 ```
+
+*Plain JS: no equivalent — types don't exist in JavaScript; delete this.*
 
 | | `interface` | `type` |
 |---|---|---|
@@ -200,6 +219,8 @@ const a: Admin = { name: 'Sam', permissions: ['delete'] };
 type Impossible = string & number;   // never: nothing is both a string and a number
 ```
 
+*Plain JS: no equivalent — types don't exist in JavaScript; delete the types (a plain `let value;` can already hold a string or a number).*
+
 **In the exam:** a union `A | B` means "one of these types", and an intersection `A & B` means "all of these at once". So `string | number` is the answer for "a string or a number", and `string & number` is `never`.
 
 ### Literal unions
@@ -212,6 +233,8 @@ type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 let theme: Theme = 'light';
 theme = 'blue';   // compile error
 ```
+
+*Plain JS: no equivalent — types don't exist in JavaScript; delete this (plain JS would accept `'blue'` without complaint).*
 
 **In the exam:** a literal union such as `'light' | 'dark'` restricts a value to a fixed set of exact strings.
 
@@ -230,6 +253,20 @@ type Result =
   | { status: 'error'; message: string };
 
 function show(r: Result) {
+  if (r.status === 'success') return r.data.length;   // data exists here
+  return r.message;                                   // message exists here
+}
+```
+
+**Plain JS:**
+
+```js
+function format(value) {
+  if (typeof value === 'string') return value.toUpperCase();   // string here
+  return value.toFixed(2);                                     // number here
+}
+
+function show(r) {
   if (r.status === 'success') return r.data.length;   // data exists here
   return r.message;                                   // message exists here
 }
@@ -267,6 +304,16 @@ interface GreetingProps {
 }
 
 function Greeting({ name, isAdmin = false }: GreetingProps) {
+  return <h2>Hello {name}{isAdmin && ' (admin)'}</h2>;
+}
+
+// used as: <Greeting name="Damian" isAdmin />
+```
+
+**Plain JS:**
+
+```jsx
+function Greeting({ name, isAdmin = false }) {
   return <h2>Hello {name}{isAdmin && ' (admin)'}</h2>;
 }
 
@@ -314,6 +361,22 @@ function Tabs() {
 }
 ```
 
+**Plain JS:**
+
+```jsx
+function Tabs() {
+  const [tab, setTab] = useState('info');
+  return (
+    <>
+      <button onClick={() => setTab('info')}>Info</button>
+      <button onClick={() => setTab('reviews')}>Reviews</button>
+      {tab === 'info' ? <ProductInfo /> : <Reviews />}
+      {tab === 'reviews' && <p>Showing reviews</p>}
+    </>
+  );
+}
+```
+
 There are three forms: the ternary `cond ? <A /> : <B />`, the `cond && <A />` form, and an early `if (...) return ...`.
 
 Trap: `{items.length && <List />}` prints `0` when the list is empty. Use `{items.length > 0 && <List />}`.
@@ -346,6 +409,21 @@ function useToggle(initial = false) {
   const [on, setOn] = useState(initial);
   const toggle = () => setOn((v) => !v);
   return [on, toggle] as const;
+}
+
+// in a component:
+const [isOpen, toggleOpen] = useToggle();
+```
+
+**Plain JS:**
+
+```js
+import { useState } from 'react';
+
+function useToggle(initial = false) {
+  const [on, setOn] = useState(initial);
+  const toggle = () => setOn((v) => !v);
+  return [on, toggle];
 }
 
 // in a component:
@@ -485,6 +563,12 @@ const { orderId } = useParams();
 const { orderId } = useParams<{ orderId: string }>();
 ```
 
+**Plain JS:**
+
+```js
+const { orderId } = useParams();
+```
+
 - The name in the destructuring must match the name after `:` in the route.
 - Params are always **strings** (or `undefined`). Use `Number(orderId)` if you need a number.
 
@@ -606,6 +690,45 @@ export function CourseCount() {
 }
 ```
 
+**Plain JS:**
+
+```jsx
+import { useEffect, useState } from 'react';
+
+export function CourseCount() {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function load() {
+      try {
+        const res = await fetch('https://example.com/api/courses', {
+          signal: controller.signal,
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        setCourses(data);
+      } catch (err) {
+        if (controller.signal.aborted) return;   // unmounted: touch no state
+        setError(err instanceof Error ? err.message : 'Request failed');
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    }
+
+    load();
+    return () => controller.abort();   // cleanup runs on unmount
+  }, []);
+
+  if (loading) return <p>Loading courses...</p>;
+  if (error) return <p>Error: {error}</p>;
+  return <p>There are {courses.length} courses.</p>;
+}
+```
+
 How each requirement is met (say this in your answer):
 
 | Requirement | Code |
@@ -645,6 +768,21 @@ Never fetch directly in the component body. Setting state causes a re-render, wh
 const BASE_URL = 'https://example.com/api';
 
 export async function getCourses(signal?: AbortSignal): Promise<Course[]> {
+  const res = await fetch(`${BASE_URL}/courses`, { signal });
+  if (!res.ok) throw new Error(`Failed to load courses: ${res.status}`);
+  return res.json();
+}
+
+// in any component:  const data = await getCourses(controller.signal);
+```
+
+**Plain JS:**
+
+```js
+// src/services/courseService.js
+const BASE_URL = 'https://example.com/api';
+
+export async function getCourses(signal) {
   const res = await fetch(`${BASE_URL}/courses`, { signal });
   if (!res.ok) throw new Error(`Failed to load courses: ${res.status}`);
   return res.json();
@@ -731,6 +869,20 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 }
 ```
 
+**Plain JS:**
+
+```js
+async function handleSubmit(e) {
+  e.preventDefault();                       // stop the browser's full-page submit
+  const errors = validateEvent(form);
+  if (Object.keys(errors).length > 0) {
+    setErrors(errors);                      // show the messages, don't submit
+    return;
+  }
+  await createEvent({ name: form.name.trim(), location: form.location.trim(), maxAttendees: Number(form.maxAttendees) });
+}
+```
+
 **In the exam:** a controlled input takes its `value` from state and updates it in `onChange`, and the submit handler calls `e.preventDefault()`, validates, and only submits when there are no errors.
 
 ### D3a: the validation function
@@ -746,6 +898,27 @@ type EventErrors = Partial<Record<keyof EventForm, string>>;
 
 function validateEvent(form: EventForm): EventErrors {
   const errors: EventErrors = {};
+
+  if (form.name.trim() === '') {
+    errors.name = 'Event name is required.';
+  }
+  if (form.location.trim() === '') {
+    errors.location = 'Location is required.';
+  }
+  const max = Number(form.maxAttendees);
+  if (!Number.isInteger(max) || max <= 0) {
+    errors.maxAttendees = 'Maximum attendees must be a positive whole number.';
+  }
+
+  return errors;   // {} means valid
+}
+```
+
+**Plain JS:**
+
+```js
+function validateEvent(form) {
+  const errors = {};
 
   if (form.name.trim() === '') {
     errors.name = 'Event name is required.';
@@ -784,6 +957,23 @@ interface NewEvent {
 }
 
 async function createEvent(event: NewEvent) {
+  const res = await fetch('/api/events', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(event),
+  });
+  if (!res.ok) throw new Error(`Create failed: ${res.status}`);
+  return res.json();   // usually the created event (201 Created)
+}
+```
+
+**Plain JS:**
+
+```js
+async function createEvent(event) {
   const res = await fetch('/api/events', {
     method: 'POST',
     headers: {
@@ -840,6 +1030,21 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
+  <QueryClientProvider client={queryClient}>
+    <App />
+  </QueryClientProvider>,
+);
+```
+
+**Plain JS:**
+
+```jsx
+// main.jsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+
+createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
     <App />
   </QueryClientProvider>,
@@ -921,6 +1126,29 @@ function EditProduct({ product }: { product: Product }) {
 }
 ```
 
+**Plain JS:**
+
+```jsx
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+function EditProduct({ product }) {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (changes) => updateProduct(product.id, changes),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+    },
+  });
+
+  return (
+    <button disabled={mutation.isPending} onClick={() => mutation.mutate({ price: 9.99 })}>
+      Save
+    </button>
+  );
+}
+```
+
 - `invalidateQueries({ queryKey: ['products'] })` marks every query whose key **starts with** `['products']` as stale (so `['products', 7]` too), and immediately refetches those currently on screen.
 - Add `exact: true` to match only that exact key.
 - Mutations also use `isPending` in v5.
@@ -965,6 +1193,18 @@ export const useThemeStore = create<ThemeState>()((set) => ({
 }));
 ```
 
+**Plain JS:**
+
+```js
+import { create } from 'zustand';
+
+export const useThemeStore = create((set) => ({   // one set of brackets in plain JS
+  theme: 'light',
+  toggleTheme: () =>
+    set((state) => ({ theme: state.theme === 'light' ? 'dark' : 'light' })),
+}));
+```
+
 - `create<ThemeState>()(...)` has **two** sets of brackets in TypeScript. That's the v5 typed form.
 - `create` returns a **Hook** (`useThemeStore`). That is the "store's generated Hook" in A12.
 - `set` **merges** the object you return into the state, so you only return the fields that change.
@@ -993,6 +1233,22 @@ function ThemeButton() {
 import { persist } from 'zustand/middleware';
 
 export const useThemeStore = create<ThemeState>()(
+  persist(
+    (set) => ({
+      theme: 'light',
+      toggleTheme: () => set((s) => ({ theme: s.theme === 'light' ? 'dark' : 'light' })),
+    }),
+    { name: 'theme' },   // localStorage key
+  ),
+);
+```
+
+**Plain JS:**
+
+```js
+import { persist } from 'zustand/middleware';
+
+export const useThemeStore = create(
   persist(
     (set) => ({
       theme: 'light',
@@ -1141,6 +1397,16 @@ A JWT (JSON Web Token) is three base64url parts joined by dots: `header.payload.
 
 ```ts
 function isTokenExpired(token: string): boolean {
+  const base64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+  const payload = JSON.parse(atob(base64));
+  return payload.exp * 1000 < Date.now();
+}
+```
+
+**Plain JS:**
+
+```js
+function isTokenExpired(token) {
   const base64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
   const payload = JSON.parse(atob(base64));
   return payload.exp * 1000 < Date.now();
