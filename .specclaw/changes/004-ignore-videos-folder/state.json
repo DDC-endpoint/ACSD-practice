@@ -1,0 +1,13 @@
+{
+  "change": "004-ignore-videos-folder",
+  "phase": "verify",
+  "branch": "",
+  "size": "bounded",
+  "phases": {
+    "proposal": {"status":"approved","at":"2026-11-25T06:53:03Z"},
+    "spec": {"status":"done","at":"2026-11-25T06:53:19Z"},
+    "tasks": {"status":"done","at":"2026-11-25T06:53:19Z"},
+    "build": {"status":"done","at":"2026-11-25T06:54:07Z"},
+    "verify": {"status":"passed","at":"2026-11-25T06:55:02Z","verdict":"PASS"}
+  }
+}

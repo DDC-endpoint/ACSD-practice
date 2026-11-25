@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "sig": "3907032626 1319",
+  "tier": "thin",
+  "tier_source": "classifier",
+  "rationale": "Adds a single videos/ line to the root .gitignore, touching one file with no open design questions and no data, trust-boundary, or release-machinery change, so it is a plain revert if undone.",
+  "domains": [],
+  "seats": [
+    {"role": "party-po", "model": "sonnet"},
+    {"role": "party-architect", "model": "opus"}
+  ],
+  "dropped": []
+}
