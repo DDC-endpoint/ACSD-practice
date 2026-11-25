@@ -85,7 +85,9 @@ Open **`exam/index.html`** in Chrome or Edge: double-click it, or drag it into t
 
 - **[JavaScript refresher](guides/JS-REFRESHER.pdf)** ([Markdown](guides/JS-REFRESHER.md)): start here if JavaScript is new. It covers basics, objects and arrays, functions and modules, and async/fetch, each with a snippet and where it shows up in React code, plus a JS traps table. It goes with drills j01–j04.
 - **[Exam-day guide](guides/EXAM-DAY.pdf)** ([Markdown](guides/EXAM-DAY.md)): the format, a minute-by-minute plan, MCQ/TF traps, how to write code answers in a text box, and a night-before checklist.
-- **[Concept refresher](guides/REFRESHER.pdf)** ([Markdown](guides/REFRESHER.md)): every mock topic, each with a snippet and an **"In the exam:"** one-liner, plus a table of MCQ traps. Read it on the morning of the test.
+- **[Concept refresher](guides/REFRESHER.pdf)** ([Markdown](guides/REFRESHER.md)): every mock topic, each with a snippet and an **"In the exam:"** one-liner, plus a table of MCQ traps. Read it on the morning of the test. Each TypeScript snippet is followed by a **Plain JS** version.
+- **[ICT quick sheet](guides/ICT-QUICK.pdf)** ([Markdown](guides/ICT-QUICK.md)): the 4-page last read before the test. It has one-line rules, keyword → answer pairs, and the code templates in plain JavaScript/JSX, plus a box showing where the types go.
+- **[Night-before sheet](guides/ICT-NIGHT-BEFORE.pdf)** ([HTML](guides/ICT-NIGHT-BEFORE.html)): the night-before revision pack. The `CourseCount` template has a plain-JS version too.
 
 ## The plan (Mon 23 → Wed 25 Nov)
 

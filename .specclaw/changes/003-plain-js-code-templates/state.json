@@ -1,0 +1,12 @@
+{
+  "change": "003-plain-js-code-templates",
+  "phase": "verify",
+  "branch": "",
+  "size": "bounded",
+  "phases": {
+    "proposal": {"status":"approved","at":"2026-11-25T04:16:38Z"},
+    "spec": {"status":"done","at":"2026-11-25T04:17:08Z"},
+    "tasks": {"status":"done","at":"2026-11-25T04:17:09Z"},
+    "verify": {"status":"passed","at":"2026-11-25T04:29:45Z","verdict":"PASS"}
+  }
+}
